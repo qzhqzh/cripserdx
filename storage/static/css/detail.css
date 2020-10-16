@@ -1,0 +1,514 @@
+/* -- [typography] --> five fonts-- */
+@font-face {
+  font-family:Merriweather-Bold;
+  src: url("../font/merriweather/Merriweather-Bold.ttf");
+}
+@font-face {
+  font-family:Merriweather-Light;
+  src: url("../font/merriweather/Merriweather-Light.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Bold;
+  src: url("../font/source-sans-pro/SourceSansPro-Bold.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Regular;
+  src: url("../font/source-sans-pro/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Italic;
+  src: url("../font/source-sans-pro/SourceSansPro-Italic.tff");
+}
+
+/* 这里是 导航栏 图片区的样式*/
+/*.navbar-brand {*/
+/*height: 150px;*/
+/*padding: 10px;*/
+/*}*/
+
+/* 这里是 导航栏 三道线区的样式*/
+/*.navbar-toggle {*/
+/*margin-top: 10px;*/
+/*margin-bottom: 100px;*/
+/*}*/
+
+/* 这里是 导航栏 文本区的样式*/
+/*.navbar-left {
+margin-top: 10px;
+}*/
+
+/*.mybody {
+background-color: #253438;
+border-color: #0490ad;
+}*/
+
+/* ----------------------- layout -------------------------*/
+
+/*正文*/
+.my-main-body {
+/*background-color: #dee6f3;*/
+  min-height:700px;
+  margin:25px  0;
+  border: 1px solid #ccc;
+  background-color: #eeeeee;
+}
+
+/*正文中两边缩进*/
+/*.mytext {
+  margin-right: 15px;
+  margin-left: 15px;*/
+/*background-color: #3f51b5*/
+/*}*/
+/*脚注*/
+.my-footer-text {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 2px solid #009688;
+}
+/*background-color: #dee6f3;*/
+/*}
+/*.my-versiontext{
+  font-family: SourceSansPro-Regular;
+  color: #33691e;
+  font-size: 13px;
+}*/
+/*.mytext #visitor{
+  font-family: SourceSansPro-Regular;
+  padding: 4px ;
+  font-size: 13px;
+}*/
+/* --------------------------- home ---------------------------*/
+.my-information-text {
+  border: 1px solid #ccc;
+  /*margin: 25px 0px 25px 15px;*/
+  margin-top: 25px;
+  margin-left: 15px;
+  font-family: Merriweather-Light;
+}
+.my-search-div{
+  padding: 0px!important;
+}
+.my-search-entry-div{
+  margin-right: 15px;
+}
+.my-information-text .my-push-pin {
+  /*float: left;*/
+  padding-top: 25px;
+  font-size: 18px;
+}
+.my-information-text h3{
+  font-weight: bold;
+  /*padding-top: 60px;*/
+  /*color: red;*/
+}
+.my-information-text p{
+  /*align-content: flex-start;*/
+  font-family: SourceSansPro-Regular;
+  padding-bottom: 20px;
+  /*text-indent: -1em;*/
+  text-transform:capitalize;
+  padding: 10px 20px;
+}
+.my-information-text p>span{
+  float:left;
+  width:0.7em;
+  font-size:220%;
+  font-family: SourceSansPro-Regular;
+  line-height:80%;
+  /*padding-left: 20px;*/
+  /*border: 1px solid red;*/
+}
+.my-search-text {
+  border: 1px solid #ccc;
+  /*margin: 25px 0px 25px 15px;*/
+  margin-top: 25px;
+  margin-left: 15px;
+  font-family: Merriweather-Light;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.my-search-text p{
+  /*align-content: flex-start;*/
+  font-family: SourceSansPro-Regular;
+  /*padding-bottom: 20px;*/
+  /*text-indent: -1em;*/
+  /*text-transform:capitalize;*/
+  padding: 10px 30px 5px 15px;
+  margin-bottom: 0px;
+  color: #999;
+}
+.my-search-text input{
+  border-radius: 0px;
+  /*border-color: #bbb;*/
+  /*margin-left: 0px;*/
+  /*margin-top: 5px;*/
+}
+.my-search-text .btn{
+  border-radius: 0px;
+  /*border-color: #bbb;*//*
+  text-align: center;*/
+  /*margin-bottom: 10px;*/
+
+}
+.btn{
+  color:black;
+  background-color: #26a69a;
+  border: 1px solid #eee;
+}
+.btn:hover,
+.btn.focus {
+  color: white;
+  text-decoration: none;
+  /*font-size: 15px;*/
+
+  background-color: #009688;
+  margin:auto;
+  box-shadow:0 0 2px #999 inset;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  /*font-size: 15px;*/
+  background-color: #009688;
+  margin:auto;
+  box-shadow:0 0 2px #999 inset;
+}
+/*quick design and search*/
+.my-search-text .form{
+  /*margin-left: 10px;*/
+  margin-left: 25px;
+  margin-right: 25px;
+  /*padding-right: 30px;*/
+}
+.my-search-text textarea{
+  border-radius: 0px;
+  border-color: #bbb;
+  /*margin-left: 15px;*/
+  /*margin-right: 15px;*/
+}
+
+/*---- bottom-part of home*/
+.my-bottom-part {
+  margin-top: 20px;
+  /*border-top: 1px solid #eee;*/
+  background-color: #e0e0e0;
+  /*height: 400px;*/
+}
+.my-bottom-part img {
+ margin:15px;
+ margin-top: 320px;
+ padding: 15px;
+ border:1px solid #bebebe;
+ /*height:300px;*/
+ /*width: auto;*/
+ float:left;
+ text-align:center;
+ width: 200px;  
+ height: auto;   
+}
+.my-citing-part {
+  /*margin-top: 20px;*/
+  border-top: 1px solid #c9c9b9;
+  background-color: #e6e6e6;
+  height: 80px;
+}
+.my-citing-part h4 {
+ margin: 35px;
+ /*padding: 15px;*/
+ /*border:1px solid #bebebe;*/
+ /*height:300px;*/
+ /*width: auto;*/
+ float:left;
+ /*text-align:center;*/
+}
+/*- design and search entry--*/
+.my-information-text .my-forword-icon {
+  /*float: left;*/
+  padding-top: 5px;
+  font-size: 18px;
+}
+.my-information-text .my-forword-icon:hover {
+  color:green;
+}
+/*.myhome{
+  border-style: outset;
+  border-width: 1px;
+  border-color: #eee;
+}*/
+/*information*/
+/*.myinformation{*/
+/*font-family: SourceSansPro-Regular;*/
+/*border-width: 1px;*/
+/*border-color: #ddd;*/
+/*border-style: outset;*/
+/*font-style: italic;*/
+/*font-weight: bold;*/
+/*font-family:fantasy;*/
+/*color: #333;*/
+/*color: #0e6d5c;*/
+/*eight: 300px;
+}
+.mysearch{
+  font-family: SourceSansPro-Regular;
+  border-width: 1px;
+  border-color: #ddd;
+  border-style: outset;
+  font-family:fantasy;
+  color: #333;*/
+  /*color: #0e6d5c;*/
+  /*height: 300px;
+}
+.mysearch label{
+  font-family: SourceSansPro-Regular;
+}
+.mytransition{
+border-width: 3px;
+border-color: #1773ba;
+border-style: ridge;
+border-radius: 3px;
+margin-top: 20px;
+}
+.mypart{
+border-width: 1px;
+border-color: #0e6d5c;
+border-style: outset;
+margin-top: 20px;
+}*/
+
+/* -------------------  design -------------------------- */
+
+/*按钮*/
+/*.btn-primary{
+color: #c7dcef;
+background-color: #1e881f
+}
+.btn-primary:hover{
+background-color: #7ed127 !important
+}
+.btn-primary:active{
+  background-color: red !important
+}
+.btn-info{
+  color: #c7dcef;
+  background-color: #1e881f
+}
+.btn-info:hover, .btn-info:active{
+  background-color: #7ed127 !important
+}
+
+/*advance 链接*/
+/*.panel-title{
+margin-top: 5px;
+}
+.panel-title a:link{
+color: #8e7b18;
+}*/
+.my-design-page {
+  margin:15px;
+}
+.my-design-page select, .my-design-page textarea, .my-design-page .btn{
+  border-radius: 0px;
+}
+
+.panel{
+  /*color:#00BCD4; */
+  background-color: #eeeeee;
+  border-color:#eeeeee;
+  border-bottom-style: none;
+  outline-style: none;
+}
+.panel input{
+  border-radius: 0px;
+}
+.panel a:link {
+  text-decoration: none;
+}
+.panel a:hover{
+  text-decoration: none;
+}
+.panel a:hover span{
+  color: green;
+}
+.panel a:actived {
+  text-decoration: none;
+}
+.panel a:visited {
+  text-decoration: none;
+}
+ /*--------------------- search page-----------------------------*/
+.my-search-page{
+  margin-top: 45px;
+  margin-left: 35px;
+  margin: 45px 35px;
+}
+.my-search-page input{
+  border-radius: 0px;
+}
+.my-search-page select{
+  border-radius: 0px;
+}
+.my-search-page .btn{
+  border-radius: 0px;
+}
+/* --------------------  help   --------------------------*/
+.my-help-page {
+  margin: 35px 25px;
+  line-height: 20px;
+}
+.my-question-list a>h4{
+  font-family:Merriweather-Light;
+  font-size: 16px;
+  margin: 15px 0px;
+  font-weight: bold;
+}
+.my-question-list p{
+  /*color: red;*/
+  font-size: 16px;
+  line-height:30px;
+  font-family: SourceSansPro-Regular;
+  padding: 0px 15px;
+  background-color: #fff;
+}
+.my-help-question h4{
+  color: #1773ba;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/*-------------------- contact-page---------------------*/
+.my-contact-page{
+  margin:35px 25px;
+}
+/* Basic Grey */
+.my-contact-page-form {
+margin: 50px auto;
+max-width: 500px;
+background: #fff;
+padding: 25px 15px;
+font: 12px SourceSansPro-Regular,serif;
+color: #777;
+/*text-shadow: 1px 1px 1px #FFF;*/
+border:1px solid #aaa;
+}
+.my-contact-page-form h1 {
+font-size: 44px;
+padding: 0px 0px 10px 40px;
+display: block;
+border-bottom:1px solid #ccc;
+margin: -10px -15px 30px -10px;;
+color: #6c674a;
+}
+.my-contact-page-form h1>span {
+display: block;
+font-size: 16px;
+}
+.my-contact-page-form label {
+display: block;
+margin: 0px;
+}
+.my-contact-page-form label>span {
+float: left;
+width: 20%;
+text-align: right;
+padding-right: 10px;
+margin-top: 10px;
+color: #6c674a;
+}
+.my-contact-page-form input[type="text"], .my-contact-page-form input[type="email"], .my-contact-page-form textarea, .my-contact-page-form select {
+border: 1px solid #DADADA;
+color: #666;
+height: 30px;
+margin-bottom: 16px;
+margin-right: 6px;
+margin-top: 2px;
+outline: 0 none;
+padding: 3px 3px 3px 5px;
+width: 70%;
+font-size: 12px;
+line-height:15px;
+box-shadow: inset 0px 1px 4px #ECECEC;
+-moz-box-shadow: inset 0px 1px 4px #ECECEC;
+-webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+.my-contact-page-form textarea{
+padding: 5px 3px 3px 5px;
+}
+.my-contact-page-form select {
+background: #FFF url('down-arrow.png') no-repeat right;
+background: #FFF url('down-arrow.png') no-repeat right);
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance: none;
+text-indent: 0.01px;
+text-overflow: '';
+width: 70%;
+height: 35px;
+line-height: 25px;
+}
+.my-contact-page-form textarea{
+height:100px;
+}
+.my-contact-page-form .button {
+background: #0097A7;
+border: none;
+padding: 10px 25px 10px 25px;
+color: #FFF;
+box-shadow: 1px 1px 5px #B6B6B6;
+border-radius: 0px;
+/*text-shadow: 1px 1px 1px #9E3F3F;*/
+cursor: pointer;
+}
+.my-contact-page-form .button:hover {
+background: #00BCD4;
+}
+.my-contact-method{
+  display: block;
+  margin:10px 55px;
+  text-align: center;
+}
+.my-contact-method .my-envelop{
+  display: block;
+}
+.my-contact-method .my-address{
+  display: block;
+}
+/* --------------------  out.tpl  -------------------------*/
+.my-out-page{
+  margin: 35px 25px;
+}
+.my-result-tr {
+  /*background-color: grey;*/
+  background-color: #aaa;
+  color: white;
+}
+
+.my-page-nav{
+  margin-top: 60px;
+  padding-top: 60px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+}
+.my-page-nav a{
+  border:1px solid #333;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.my-page-nav a:link{
+  color: #1e881f;
+}
+.my-page-nav a:hover{
+  color: #cc777a;
+}
+.my-page-nav a:active{
+  color: #7ed127;
+}
+.my-page-nav a:visited{
+  color: grey;
+}

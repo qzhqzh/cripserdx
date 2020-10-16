@@ -1,0 +1,82 @@
+* {
+	list-style:none;
+}
+
+h1 {
+	text-align:center;
+}
+.bag {
+	background:lightblue;
+}
+.panal {
+	/*background:#f0f0f0;*/
+	/*float:right;*/
+	display:none;
+}
+.panal .tab {
+	/*overflow:hidden;*/
+	/*background:gainsboro;*/
+}
+.panal .tab a {
+	color: red;
+	display:block;
+	padding:0px 20px;
+	/*float:left;*/
+	text-decoration:none;
+	/*color:#333;*/
+}
+.panal .tab a:hover {
+	/*background:gray;*/
+	color:#fff;
+	text-decoration:none;
+}
+.panal .tab a.on {
+	/*background:gray;*/
+	text-decoration:none;
+	color:white;
+}
+.panal .content {
+	overflow:hidden;
+	padding:10px;
+}
+.panal .content li {
+	display:block;
+}
+/*arcile*/
+			
+.comma {
+	/*background:#f2f2f2;*/
+	/*margin-top:50px;*/
+}
+.arcile {
+	width: "100%";
+	/*background:gainsboro;*/
+	/*float:left;*/
+	
+	text-align:left;
+	padding: 10px;
+}
+.arcile ul{
+	padding: 0px;
+}
+.info-ul>ul li {
+	list-style:none;
+	line-height:200px;
+	/*float:left;*/
+	margin:10px 0 0 10px;
+	display: inline-block;
+}
+.info-img {
+	width:50%;
+	padding:5px;
+	background:white;
+	margin:22%;
+}
+.info-meu>ul li a {
+	text-decoration:none;
+	line-height:30px;
+	color: black;
+}
+.info-meu>ul li a:hover {
+	color:blue;
+}

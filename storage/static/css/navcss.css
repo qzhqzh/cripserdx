@@ -1,0 +1,314 @@
+/* -- [typography] --> five fonts-- */
+@font-face {
+  font-family:Merriweather-Bold;
+  src: url("../font/merriweather/Merriweather-Bold.ttf");
+}
+@font-face {
+  font-family:Merriweather-Light;
+  src: url("../font/merriweather/Merriweather-Light.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Bold.ttf;
+  src: url("../font/source-sans-pro/SourceSansPro-Bold.ttf.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Regular;
+  src: url("../font/source-sans-pro/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family:SourceSansPro-Italic;
+  src: url("../font/source-sans-pro/SourceSansPro-Italic.tff");
+}
+
+
+/* 最上方的水平导航栏*/
+/* ------------------------ 宽屏状态 ---------------------------------*/
+#my-navbar-top-reponsive-list {
+  background-color: rgb(110, 177, 115);
+  /*background-color: #7BB22B;*/
+}
+#my-navbar-top-reponsive-list ul {
+  list-style-type:none;
+  margin:0;
+  padding:0px;
+  overflow: hidden;
+}
+#my-navbar-top-reponsive-list a:link, #my-navbar-top-reponsive-list a:visited {
+  /*display:block;*/
+  /*width:85px;*/
+  /*font-weight:bold;*/
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  /*background-color:rgb(137, 158, 98);*/
+  /*text-align:center;*/
+  padding: 4px 13px;
+  text-decoration:none;
+  /*text-transform:uppercase;*/
+  font-family: SourceSansPro-Regular;
+  text-align: right;
+}
+#my-navbar-top-reponsive-list a:hover, #my-navbar-top-reponsive-list a:active {
+  color: white;
+  background-color: rgb(137, 158, 98);
+}
+
+/* ----------------------- 窄屏状态 ----------------------------------*/
+#my-navbar-top-reponsive-button {
+  background-color: rgb(110, 177, 115);
+}
+#my-navbar-top-reponsive-button .navbar-toggle{
+  padding: 0 6px;
+  margin: 3px 15px;
+  height: 22px;
+  border-radius: 1px;
+  border-color: #ccc;
+}
+#my-navbar-top-reponsive-button .icon-bar {
+  display: block;
+  width: 16px;
+  height: 1px;
+  background-color: #ccc;
+}
+#my-navbar-top-reponsive-button .icon-bar  {
+  margin-top: 2px;
+  background-color: white;
+}
+#my-navbar-top-reponsive-button .navbar-toggle:hover {
+  background-color: white;
+}
+
+#my-navbar-top-reponsive-button .navbar-toggle:hover .icon-bar{
+  background-color: rgb(110, 177, 115);
+  /*background-color: #7BB22B;*/
+}
+
+/*#### 网页的 brand brand brand*/
+#my-navbar-brand-text{
+  /*background-color: #009688;*/
+  background-color: rgb(249,249,249);
+  /*border: 6px solid rgb(110, 177, 115);*/
+  /*border-radius: 10px;*/
+  /*background-color: #7197FF;*/
+  /*height: 120px;*/
+  /*border-right:1px solid #00897b;*/
+}
+/*数据库名字*/
+#my-navbar-brand-text p{
+  /*font-family: Merriweather-Light;*/
+  /*color: black;*/
+  font-size: l;
+  /*font-weight: bold;*/
+/*  padding-top: 55px;
+  padding-left: 10px;*/
+  padding: 30px 15px 0px 15px;
+  text-align: center;
+}
+
+
+
+/*---------------------------下面的navbar-----------------------------*/
+#my-navbar-bottom-reponsive-list {
+/*  background-color: rgb(204, 191, 137); */  /* 500 的蓝色*/
+  /*background-color: #BAFF57;   /* 500 的蓝色*/
+  /*border-bottom:2px solid #00897b;
+  border-right:2px solid #00897b;*/
+  /*box-shadow: */
+  /*text-align: center;*/
+}
+#my-navbar-bottom-reponsive-list ul{
+  /*text-align: center;*/
+  /*background-color: rgb(204, 191, 137);   /* 500 的蓝色*/
+  /*display: block;*/
+}
+#my-navbar-bottom-reponsive-list > li{
+  height: 50px;
+  width: 120px;
+  text-align: center;
+  /*font-family: SourceSansPro-Regular;*/
+  /*color: #222;*/
+/*  padding-top: 4px;*/
+/*  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 24px;*/
+  /*font-size: 14px;*/
+  /*float: left;*/
+  /*background-color: rgb(204, 191, 137);*/
+  border-radius:15px;
+  cursor: pointer;
+}
+#my-navbar-bottom-reponsive-list li + li{
+  margin-left: 20px;
+}
+#my-navbar-bottom-reponsive-list span{
+ margin-top:20px;
+/*  color: #222;
+  padding:6px 3px;
+  height:32px;
+  width: 100px;
+  display:block;*/
+  
+}
+#Home{
+  background-color: rgb(54, 158, 187);
+}
+#Home:hover{
+  background-color: rgb(126, 198, 217);
+  border-radius: 15px;
+  color: white;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#Design{
+  background-color: rgb(250, 161, 35)
+}
+#Design:hover{
+  background-color: rgb(239, 215, 148);
+  border-radius: 15px;
+  color: white;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#Search{
+  color: black!important;
+  background-color: rgb(219, 77, 73);
+}
+#Search:hover{
+  background-color: rgb(227, 119, 116);
+  border-radius: 15px;
+  color: black!important;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#Search:focus{
+  background-color: rgb(227, 119, 116);
+  border-radius: 15px;
+  color: white;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#Help{
+  background-color: rgb(0, 114, 205)
+}
+#Help:hover{
+  background-color: rgb(52, 165, 255);
+  border-radius: 15px;
+  color: white;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#Contact{
+  background-color: rgb(96, 191, 97)
+}
+#Contact:hover{
+  background-color: rgb(132, 206, 133);
+  border-radius: 15px;
+  color: white;
+  /*padding:6px 6px;*/
+  /*height:32px;*/
+}
+#my-navbar-bottom-reponsive-button {
+  background-color: #26a69a;
+  background-color: #26a69a;
+  /*background-color: #7197FF;*/
+}
+#my-navbar-bottom-reponsive-button .navbar-toggle:hover {
+  background-color: #009688;
+  /*background-color: #7197FF;*/
+}
+#my-navbar-bottom-reponsive-button .navbar-toggle:hover .icon-bar{
+  background-color: #ddd;
+}
+/*#my-navbar-bottom-reponsive-list a:link{text-decoration:none;}
+#my-navbar-bottom-reponsive-list a:visited{text-decoration:none;}
+/*#my-navbar-bottom-reponsive-list a:hover{
+  text-decoration:none;
+  color: #757575;
+  font-size:13px;
+  height: 32px;
+}*/
+/*#my-navbar-bottom-reponsive-list a:active{text-decoration:none;}*
+/*#my-navbar-bottom-reponsive-button a:link{text-decoration:none;}
+.navbar-text a:visited{text-decoration:none;}*/
+
+/*.navbar-text a:active{text-decoration:none;}*/
+
+
+/*nav 面板*/
+
+/*.navbar-default{
+background-color: #3f51b5;
+border-color: #8d602d;
+margin-bottom: 3px;
+min-height: 95px;
+border-radius: 0;   /* 直角*/
+/*}*/
+
+/*nav brand 面板*/
+/*.navbar-default .navbar-brand {
+color: #1773ba;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+color: #1773ba;
+}*/
+
+/*navbar-nav 属性*/
+/*.navbar-default .navbar-nav > li > a {
+color: #aaccbb;
+}*/
+/*.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+color: #ecdbff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+color: #ecdbff;
+background-color: #1773ba;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+color: #ecdbff;
+background-color: #1773ba;
+}*/
+/*toggle 属性*/
+/*.navbar-default .navbar-toggle {
+border-color: #c7dcef;
+margin-top: 25px;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+background-color: #c7dcef;
+}
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #c7dcef;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+border-color: #c7dcef;
+}
+/*navbar-link*/
+/*.navbar-default .navbar-link {
+color: #c7dcef;
+}
+.navbar-default .navbar-link:hover {
+color: #ecdbff;*/
+/*}*/
+
+/*@media (max-width: 767px) {
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+color: #c7dcef;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+color: #ecdbff;
+}
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+color: #ecdbff;
+background-color: #c7dcef;
+}
+}*/

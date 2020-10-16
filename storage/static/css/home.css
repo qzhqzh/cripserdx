@@ -1,0 +1,17 @@
+#organism
+
+#organismSummary td{
+  font-weight: normal;
+} 
+#primerSummary td{
+  font-weight: normal;
+}
+
+#methodTable {
+  margin-top: -10px;
+}
+#methodTable td{
+  padding-right: 12px;
+}
+
+

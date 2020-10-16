@@ -1,0 +1,569 @@
+
+.container{
+  min-height: 800px;
+}
+p{
+  text-align: justify;
+  font-size: 16px;
+  font-family: "helvetica", "arial", "Times New Roman", "verdana", "Georgia";
+}
+
+.fs14{
+  font-size: 14px;
+}
+
+.fs18{
+  font-size: 18px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+
+.center{
+  text-align: center;
+}
+
+.grey{
+  color: grey;
+}
+.blue{
+  color: blue;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+
+.choosed{
+ font-size: 16px;
+ color: blue;
+}
+
+/*-------------------------------  nav 导航  -------------------------------  */
+
+#logo{ 
+  float: left;
+  display:inline;
+  margin-top: 19px;
+  /*z-index:1;*/  /* 用作固定header*/
+}
+#hzau_logo{
+	float: right;
+ 	margin-top: 11px;
+ 	margin-right: 5px;
+}
+.red{
+	color: #ff3300;
+	display: inline;
+}
+.blue{
+	color :#0066ff;
+	display: inline;
+}
+.green{
+	color :#009933;
+	display: inline;
+}
+#title{
+	font-family: sans-serif;
+	font-weight: bold;
+	height:80px;
+	padding-top: 35px;
+	padding-left:15px;
+	padding-right:15px;
+	font-size: 18px;
+	text-align: center;
+	text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+}
+/*___________________________________nav___list________________________________________*/
+.deepblue{
+	background-color: #003399
+}
+#whole-nav{
+	border-radius: 3px;
+}
+
+
+#example-navbar-collapse > ul > li:hover{
+    background-color: #0066ff;		/*lightblue*/
+    cursor: pointer;
+    color: black;
+}
+#example-navbar-collapse > ul > li:active{
+    background-color: #0066cc;		/*darkblue*/
+    cursor: pointer;
+}
+#example-navbar-collapse > ul > li > a { 
+	color: white;
+    font-size: 18px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#example-navbar-collapse > ul > li > a:focus, #example-navbar-collapse > ul > li > a:active{ 
+	background-color: #0066ff;
+	color: white;
+    font-size: 18px;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+#example-navbar-collapse > ul > li > ul { 
+	background-color: #99c2ff;
+}
+#example-navbar-collapse > ul > li > ul > li >a:hover{ 
+	background-color: #009933;
+}
+#example-navbar-collapse > ul > li > ul > li >a:active{ 
+	background-color: rgb(18, 91, 58);
+}
+
+.select-button{
+	width:300px;
+	height:30px;
+	cursor:pointer;
+	border: none;
+	background-color: #99c2ff;
+}
+.select-button:hover{
+	color: white;
+	background-color: #0052cc;
+}
+.select-button:active{
+	color: white;
+	background-color: #0052cc;
+}
+/* -----------------------  foot ----------------------*/
+footer{
+	min-height: 0px!important;
+	border-top: 2px  black solid;
+/*	margin-right: 75px;
+	margin-left: 75px;*/
+
+	padding-top: 8px;
+}
+footer p{
+	font-size: 14px;
+	font-size: bold;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+/*-------------------------------  home page  -------------------------------  */
+
+.box{
+	padding: 10px 15px;
+	border: 1px dashed #AA7700 ; 
+	border-radius: 10px;
+	background: #fafaff;
+	-moz-box-shadow:1px 1px 1px #bbb;
+	-webkit-box-shadow:1px 1px 1px #bbb; 
+	box-shadow:1px 1px 1px #bbb;
+}
+.box2{
+	padding: 10px 5px;
+	border: 1px dashed #AA7700 ; 
+	border-radius: 10px;
+	background: #fafaff;
+	-moz-box-shadow:1px 1px 1px #bbb;
+	-webkit-box-shadow:1px 1px 1px #bbb; 
+	box-shadow:1px 1px 1px #bbb;
+}
+#welcome{
+	font-size: 24px;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+	text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+} 
+.text-in-box{
+	font-size: 18px;
+	line-height: 22px;
+	margin-top: 0px!important;
+}
+.box > p{
+	margin: 15px;
+}
+
+.title-in-box {
+	/*background-color: rgb(217, 125, 240);*/
+	text-align: left; 
+	display: inline-block; 
+	line-height: 28px; 
+	font-weight: bold; 
+	padding: 5px;
+	border-radius: 8px;
+}
+#method_desc{
+	font-size: 24px;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+	text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+}
+
+/*展示图*/
+/* select box */
+.select_box{
+	text-align: center;
+}
+.select_box>ul{
+	margin-left: 15px;
+	margin-right: 15px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.select_box>ul>li{
+	list-style: none;
+	background-color: pink;
+	display: inline-block; 
+	width: 240px;
+	padding: 5px;
+	margin-right: 5px;
+	margin-bottom: 2px;
+	text-align: left;
+	font-weight: 500;
+	font-size: 14px;
+}
+.select_box>ul>li:hover{
+	color: white;
+	background-color: green;
+}
+
+/*---------- select -------------*/
+#description_box{
+	text-align: center;
+}
+.img img{
+	margin-top:15px;
+	height:auto; 
+	width:600px;
+	display: none;
+	/*padding: 2px;
+	margin:0px;*/
+	/*border-top: 1px solid #ccc;*/
+	/*border-bottom: 1px solid #ccc;*/
+	/*vertical-align:middle;*/
+}
+.on{
+  display: inline !important; 
+}
+/*-------------- slide ------------*/
+.updates {
+	border-color: lightblue;
+	padding: 20px;
+}
+.updates .title-in-box{
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+.updates p + p{
+	font-size:15px;
+	line-height: auto;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	/*padding-top: 0px;*/
+	margin-top: 5px;
+}
+
+
+#method-in-design{
+	font-size: 24px;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+	text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+}
+
+.my-design-page{
+	font-size: 16px;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+.help-block{
+	font-size: 14px;
+}
+#exampleInput{
+	color: #0066ff;
+}
+#exampleInput:hover{
+	color: #0044cc;
+}
+.btn{
+	color: white;
+	background-color: #0066ff;
+}
+.btn:hover{
+	color: white;
+	background-color: #3385ff;
+}
+.btn:active{
+	color: white;
+	background-color: #003d99;
+}
+
+
+.panel-title > a{
+	color: #0066ff;
+	font-weight: bold;
+}
+.panel-title > a:hover{
+	color: #0066ff;
+	font-weight: bold;
+	text-decoration: none;
+}
+.panel-title > a:focus{
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/* design -----------------------------------------*/
+
+.dropdown-menu input {
+  text-align: left;
+  padding-left:20px;
+}
+
+#protocolList li{
+ line-height: 30px;
+ height:30px;
+ width:300px;
+}
+
+#protocolList li a:hover{
+ color:white;
+}
+
+#submitList li{
+ line-height: 30px;
+ height:30px;
+ width:300px;
+}
+
+#submitList li a:hover{
+ color:white;
+}
+
+#searchList input:hover{
+ background: #DC143C;
+}
+
+/*------------------------ search -------------------*/
+#search-by-select{
+	border-width: 1px;
+	border-color: grey;
+	border-style: dashed;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+#search-by-select > textarea{
+	width: 100%;
+}
+/*------------------------ protocol -----------------*/
+.imgDesc{
+  font-size:15px;
+}
+.result{
+  margin:0 15px 0 15px;
+}
+
+
+/* ------------------------------------ submit - table*/
+
+
+#myform{ 
+  padding-left:  30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  padding-bottom: 50px;
+} 
+#myform textarea{
+	height: 80px;
+} 
+#myform button{
+	display: line-block;
+} 
+
+ /*download */
+ /* Border styles */
+#table-1 thead, #table-1 tr {
+border-top-width: 1px;
+border-top-style: solid;
+border-top-color: rgb(230, 189, 189);
+}
+#table-1 {
+border-bottom-width: 1px;
+border-bottom-style: solid;
+border-bottom-color: rgb(230, 189, 189);
+}
+
+/* Padding and font style */
+#table-1 td, #table-1 th {
+padding: 5px 10px;
+font-size: 12px;
+font-family: Verdana;
+color: rgb(177, 106, 104);
+}
+/* Alternating background colors */
+#table-1 tr:nth-child(even) {
+background: rgb(238, 211, 210)
+}
+#table-1 tr:nth-child(odd) {
+background: #FFF
+}
+
+/* Table Head */
+#table-6 thead th {
+background-color: rgb(128, 102, 160);
+color: #fff;
+border-bottom-width: 0;
+}
+
+/* Column Style */
+#table-6 td {
+color: #000;
+}
+/* Heading and Column Style */
+#table-6 tr, #table-6 th {
+border-width: 1px;
+border-style: solid;
+border-color: rgb(128, 102, 160);
+}
+
+/* Padding and font style */
+#table-6 td, #table-6 th {
+padding: 5px 10px;
+font-size: 12px;
+font-family: Verdana;
+font-weight: bold;
+}
+
+/* Table Head */
+#table-7 thead th {
+background-color: rgb(81, 130, 187);
+color: #fff;
+border-bottom-width: 0;
+}
+
+/* Column Style */
+#table-7 td {
+color: #000;
+}
+/* Heading and Column Style */
+#table-7 tr, #table-7 th {
+border-width: 1px;
+border-style: solid;
+border-color: rgb(81, 130, 187);
+}
+
+/* Padding and font style */
+#table-7 td, #table-7 th {
+padding: 5px 10px;
+font-size: 12px;
+font-family: Verdana;
+font-weight: bold;
+}
+
+
+/* Table Head */
+#table-5 thead th {
+background-color: rgb(156, 186, 95);
+color: #fff;
+border-bottom-width: 0;
+}
+
+/* Column Style */
+#table-5 td {
+color: #000;
+}
+/* Heading and Column Style */
+#table-5 tr, #table-5 th {
+border-width: 1px;
+border-style: solid;
+border-color: rgb(156, 186, 95);
+}
+
+/* Padding and font style */
+#table-5 td, #table-5 th {
+padding: 5px 10px;
+font-size: 12px;
+font-family: Verdana;
+font-weight: bold;
+}
+
+
+
+/*--------------data-table-*/ 
+
+#tags li{
+	display: inline-block;
+	cursor: pointer;
+	color: blue
+	font-size:20px;
+	font-weight: bold;
+	height: 40px;
+	line-height:40px;
+	width: 120px;
+	border: 1px black solid;
+	margin: 20px;
+	text-align: center;
+	align-items: center; 
+	justify-content: center;
+
+
+}
+
+#tags li + li{
+	float:left;
+}
+
+
+#stat1{
+	font-size: 16px;
+	font-weight: bold;
+}
+#stat1 thead{
+	background-color: lightblue;
+	border-bottom: 2px grey solid;
+}
+#stat2{
+	font-size: 16px;
+	font-weight: bold;
+}
+#stat2 thead{
+	background-color: lightgreen;
+	border-bottom: 2px grey solid;
+}
+
+
+/*# ---------------------- contact --------------------------*/
+
+.contact-page{
+	margin-left: 35px;
+	margin-right: 35px;
+	margin-top: 45px;
+}
+.contact-page label p{
+	font-size: 26px;
+}
+.contact-page p{
+	font-size: 18px;
+	text-indent:1em;
+}
+.software p{
+	font-size: 16px;
+	margin-left: 1em;
+	margin-right: 1em;
+	text-indent:0em;
+}
+
+
+
+.liclass{
+	list-style-type: none;
+}
