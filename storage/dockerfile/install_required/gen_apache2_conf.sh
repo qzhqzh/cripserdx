@@ -12,6 +12,7 @@ echo "
     Alias /static/admin/ /usr/local/lib/python3.6/dist-packages/django/contrib/admin/static/admin/
     Alias /static/rest_framework/ /usr/local/lib/python3.6/dist-packages/rest_framework/static/rest_framework/
     Alias /static/debug_toolbar/ /usr/local/lib/python3.6/dist-packages/debug_toolbar/static/debug_toolbar/
+    Alias /static/ /home/site/api/storage/collect_static/
 
     ServerName crisperdx
     ErrorLog $log_dir/api.crisperdx-error_log
@@ -19,7 +20,7 @@ echo "
 
     WSGIDaemonProcess crisperdx python-path=$api_dir
     WSGIProcessGroup crisperdx
-    WSGIScriptAlias /api $api_dir/config/wsgi.py process-group=crisperdx
+    WSGIScriptAlias / $api_dir/config/wsgi.py process-group=crisperdx
     WSGIPassAuthorization On
     <Directory $api_dir/config/>
         <Files wsgi.py>
@@ -35,6 +36,8 @@ echo "
     <Directory /usr/local/lib/python3.6/dist-packages/debug_toolbar/static/debug_toolbar/>
         Require all granted
     </Directory>
-
+    <Directory /home/site/api/storage/collect_static/>
+        Require all granted
+     </Directory>
 </VirtualHost>
 "
