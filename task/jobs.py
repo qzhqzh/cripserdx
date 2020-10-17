@@ -18,4 +18,3 @@ def notification_service(self):
             notice.cid = cid
             notice.send()
     connection.close()
-    
