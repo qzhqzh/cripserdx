@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'softdelete',
+    'task',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +136,17 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+# TEMPLATE
+TEMPLATE_ROOT = os.path.join(BASE_DIR, 'storage', 'notices')
+
+# EMAIL
+# https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-EMAIL_HOST
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '28630707@qq.com'
+EMAIL_HOST_PASSWORD = 'dxhbfebsxubvbhcf'
+DEFAULT_FROM_EMAIL = '28630707@qq.com'
+EMAIL_SUBJECT_PREFIX = '【Crisperdx】'
+WEB_HOST = '106.53.58.248:9003'
