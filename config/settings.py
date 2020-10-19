@@ -76,11 +76,22 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'NAME': 'crisperdx',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'crisperdx',
+        'PASSWORD': 'crisperdx',
+        'HOST': 'postgresql-crisperdx',
+        'PORT': '5432',
+        'ATOMIC_REQUESTS': True,
+    },
 }
 
 # Password validation
@@ -150,3 +161,12 @@ EMAIL_HOST_PASSWORD = 'dxhbfebsxubvbhcf'
 DEFAULT_FROM_EMAIL = '28630707@qq.com'
 EMAIL_SUBJECT_PREFIX = '【Crisperdx】'
 WEB_HOST = '106.53.58.248:9003'
+
+## CELELY
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_TASK_ROUTES = {
+    #'analyze.tasks.grandamelie.run_grandamelie_task': {'queue': 'analyze_amelie'},
+    #'analyze.tasks.common.run_or_check_task': {'queue': 'analyze_task'},
+    'config.celery.debug_task': {'queue': 'task'},
+    #'grandbox.notices.notification_service': {'queue': 'email'},
+}
