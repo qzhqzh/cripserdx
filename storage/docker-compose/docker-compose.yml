@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: postgresql-crisperdx
+    image: "postgres:12.4"
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: crisperdx
+      POSTGRES_USER: crisperdx
+      POSTGRES_PASSWORD: crisperdx
+    volumes:
+      - ./data:/var/lib/postgresql/data
