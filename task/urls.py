@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from auth.views import UserViewSet
+from .views import TaskViewSet
 
 router = routers.SimpleRouter(trailing_slash=False)
-router.register(r'user', UserViewSet)
+router.register(r'task', TaskViewSet)

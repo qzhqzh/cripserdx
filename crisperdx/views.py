@@ -1,5 +1,7 @@
 from django.template.response import TemplateResponse
 
+from task.models import Task
+
 
 def home_view(request):
     response = TemplateResponse(request, 'home.html', {})
@@ -28,4 +30,10 @@ def protocol_view(request):
 
 def contact_view(request):
     response = TemplateResponse(request, 'contact.html', {})
+    return response
+
+
+def task_view(request):
+    tasks = Task.objects.all()
+    response = TemplateResponse(request, 'tasks.html', {'tasks': tasks})
     return response

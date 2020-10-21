@@ -2,10 +2,10 @@ from __future__ import absolute_import, unicode_literals
 
 import os
 
-from celery import Celery, platforms
+from celery import Celery, platforms, Task
+from django.core import mail
 
-platforms.C_FORCE_ROOT = True  #加上这一行
-
+platforms.C_FORCE_ROOT = True  # 加上这一行
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -25,3 +25,29 @@ app.autodiscover_tasks()
 @app.task(bind=True)
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
+
+
+@app.task(max_retries=3, time_limit=3 * 24 * 60 * 60, )
+def run_task(task):
+    from task.models import Job
+    Job(task).run()
+
+
+@app.task(bind=True)
+def notification_service(self):
+    from task.models import Notice
+    for notice in Notice.objects.all():
+        notice.send()
+
+    connection = mail.get_connection()
+    connection.open()
+    cid = str(self.request.id)
+    notices = Notice.objects.filter(status=0, cid='')
+    notices.update(cid=cid)
+    for notice in Notice.objects.filter(cid=cid):
+        notice.send()
+    for notice in Notice.objects.filter(status=1):
+        if notice.celery_status == 'ABORT':
+            notice.cid = cid
+            notice.send()
+    connection.close()

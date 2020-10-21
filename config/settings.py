@@ -165,8 +165,16 @@ WEB_HOST = '106.53.58.248:9003'
 ## CELELY
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_TASK_ROUTES = {
-    #'analyze.tasks.grandamelie.run_grandamelie_task': {'queue': 'analyze_amelie'},
-    #'analyze.tasks.common.run_or_check_task': {'queue': 'analyze_task'},
     'config.celery.debug_task': {'queue': 'task'},
-    #'grandbox.notices.notification_service': {'queue': 'email'},
+    'config.celery.run_task': {'queue': 'task'},
+    'config.celery.notification_service': {'queue': 'email'},
 }
+CELERY_BROKER_URL = 'redis://%s:%d/%d' % ('redis-crisperdx', 6379, 1)
+CELERY_RESULT_BACKEND = 'redis://%s:%d/%d' % ('redis-crisperdx', 6379, 1)
+
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 60 * 60 * 24 * 365}
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_RESULT_SERIALIZER = 'pickle'
+CELERY_ACCEPT_CONTENT = ['pickle', 'json']
+CELERY_TIMEZONE = 'UTC'
+CELERYD_CONCURRENCY = 45  # 并发个数

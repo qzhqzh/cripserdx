@@ -1,7 +1,10 @@
 import importlib
 import os
+import subprocess
 import uuid
 
+import celery
+from celery.result import AsyncResult
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMultiAlternatives
@@ -10,6 +13,8 @@ from django.template import Template, Context
 from django.utils import timezone
 from softdelete.models import SoftDeleteObject, SoftDeleteManager, SoftDeleteQuerySet
 
+from config.celery import app
+from config.funcs import utc_now
 from config.settings import TEMPLATE_ROOT
 
 
@@ -59,8 +64,8 @@ class Notice(CoreModel):
         """任务状态"""
         FAIL = -1, 'Error'
         WAITING = 0, 'Waiting'
-        RUNNING = 2, 'Running'
-        SUCCESS = 3, 'Finish'
+        RUNNING = 1, 'Running'
+        SUCCESS = 2, 'Finish'
 
     status = models.IntegerField(choices=StatusChoices.choices, default=StatusChoices.WAITING, verbose_name='Notice status')
     started_at = models.DateTimeField(null=True, blank=True, verbose_name='Started at')
@@ -106,6 +111,17 @@ class Notice(CoreModel):
         email.attach_alternative(html, "text/html")
         email.send()
 
+    @property
+    def celery_status(self):
+        if self.status == 2:
+            return 'SUCCESS'
+        if not self.cid:
+            return 'NO SUBMIT'
+        status = AsyncResult(self.cid).status
+        if status != 'SUCCESS' and self.started_at and utc_now().timestamp() - self.started_at.timestamp() > 300:
+            return 'ABORT'
+        return status
+
 
 class Task(CoreModel):
     class Meta:
@@ -115,73 +131,58 @@ class Task(CoreModel):
 
     class StatusChoices(models.IntegerChoices):
         """任务状态"""
-        ERROR = -1, 'Error'
+        FAIL = -1, 'Fail'
         WAITING = 0, 'Waiting'
         RUNNING = 2, 'Running'
-        FINISH = 3, 'Finish'
+        SUCCESS = 3, 'Success'
 
     status = models.IntegerField(choices=StatusChoices.choices, default=StatusChoices.WAITING, verbose_name='Task status')
     cmd = models.CharField(max_length=1024)
     rc = models.IntegerField(null=True)
-    msg = models.CharField(max_length=10240)
+    msg = models.CharField(max_length=10240, blank=True, null=True)
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)
     started_at = models.DateTimeField(null=True, blank=True)
     finished_at = models.DateTimeField(null=True, blank=True)
 
+    def create_notices(self):
+        Notice.objects.create(model='task.Task', model_id=str(self.id), model_method='create')
+
+    def run_notices(self):
+        Notice.objects.create(model='task.Task', model_id=str(self.id), model_method='run')
+
+    def fail_notices(self):
+        Notice.objects.create(model='task.Task', model_id=str(self.id), model_method='fail')
+
+    def success_notices(self):
+        Notice.objects.create(model='task.Task', model_id=str(self.id), model_method='success')
+
+    def fail(self):
+        self.status = self.StatusChoices.FAIL
+        self.finished_at = utc_now()
+        self.save()
+        self.fail_notices()
+
+    def success(self):
+        self.status = self.StatusChoices.SUCCESS
+        self.finished_at = utc_now()
+        self.save()
+        self.success_notices()
+
+class Job(object):
+
+    def __init__(self, task):
+        self.task = task
+
     def run(self):
-        Notice.objects.create(model='Task', model_id=str(self.id), model_method='run')
+        self.task.status = self.task.StatusChoices.RUNNING
+        self.task.started_at = utc_now()
+        self.task.save()
+        self.task.run_notices()
 
+        self.task.rc, self.task.msg = subprocess.getstatusoutput(self.task.cmd)
+        self.task.save()
 
-
-    # def __str__(self):
-    #     return '%s-%s-%s' % (self.model, self.model_id, self.model_method)
-    #
-    # @property
-    # def celery_status(self):
-    #     if self.status == 2:
-    #         return 'SUCCESS'
-    #     if not self.cid:
-    #         return 'NO SUBMIT'
-    #     status = AsyncResult(self.cid).status
-    #     if status != 'SUCCESS' and self.start_at and utc_now().timestamp() - self.start_at.timestamp() > 300:
-    #         return 'ABORT'
-    #     return status
-    #
-
-    #
-    # @classmethod
-    # def new_msg(cls, model, method, **params):
-    #     kwargs = {
-    #         'content_object': model,
-    #         'model_method': method,
-    #         'params': params
-    #     }
-    #     cls.objects.create(**kwargs)
-    #
-    # def send(self):
-    #     try:
-    #         if hasattr(self.content_object, self.model_method):
-    #             self.start()
-    #             getattr(self.content_object, self.model_method)(**self.params)
-    #             self.finish()
-    #         else:
-    #             raise Exception('method "%s" not found in model "%s"' % (self.model_method, str(self.content_type)))
-    #     except Exception as e:
-    #         self.fail(e)
-    #
-    # def start(self):
-    #     self.status = 1
-    #     self.start_at = utc_now()
-    #     self.save()
-    #
-    # def finish(self):
-    #     self.status = 2
-    #     self.start_at = utc_now()
-    #     self.save()
-    #
-    # def fail(self, msg):
-    #     self.status = -1
-    #     self.finished_at = utc_now()
-    #     self.error_log = msg
-    #     self.save()
-    #     return False
+        if self.task.rc:
+            self.task.fail()
+        else:
+            self.task.success()

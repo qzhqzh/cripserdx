@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from auth.urls import router as auth_router
+from task.urls import router as task_router
 import crisperdx.urls
 from crisperdx.views import home_view
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('auth/', include(auth_router.urls)),
+    path('task/', include(task_router.urls)),
 
     # not very good
     path('', include(crisperdx.urls)),
