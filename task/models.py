@@ -137,7 +137,7 @@ class Task(CoreModel):
         SUCCESS = 3, 'Success'
 
     status = models.IntegerField(choices=StatusChoices.choices, default=StatusChoices.WAITING, verbose_name='Task status')
-    cmd = models.CharField(max_length=1024)
+    cmd = models.CharField(max_length=1024, blank=True)
     rc = models.IntegerField(null=True)
     msg = models.CharField(max_length=10240, blank=True, null=True)
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)
