@@ -3,17 +3,18 @@
 {% block content %}
         <form action="{% url 'register' %}" enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        <input type="text" name="user">用户名
-        <br>
-        <input type="password" name="passwd1">密码
-        <br>
-        <input type="password" name="passwd2">确认密码
-        <br>
-        <input type="email" name="email">邮箱
-        <br>
-        <input type="submit" value="注册">
+            {{ form.as_p}}
+            <input type="submit" value="submit">
+        {% if error_msg %}
+            {% for msg in error_msg %}
+
+            {% endfor %}
+        {% endif %}
+
 
     </form>
+
+
 {% endblock content %}
 <body>
 

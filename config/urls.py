@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from user.urls import router as auth_router
 import crisperdx.urls
-import user.urls
+import myuser.urls
 
 from crisperdx.views import home_view
 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-user/', include('rest_framework.urls', namespace='rest_framework')),
     # path('user/', include(auth_router.urls)),
-    path('myuser/', include(user.urls)),
+    path('myuser/', include('myuser.urls')),
 
     # not very good
     path('', include(crisperdx.urls)),
