@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from auth.urls import router as auth_router
+from user.urls import router as auth_router
 import crisperdx.urls
+import user.urls
+
 from crisperdx.views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('auth/', include(auth_router.urls)),
+    path('api-user/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('user/', include(auth_router.urls)),
+    path('myuser/', include(user.urls)),
 
     # not very good
     path('', include(crisperdx.urls)),

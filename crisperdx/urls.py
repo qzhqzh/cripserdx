@@ -9,4 +9,6 @@ urlpatterns = [
     path('faq', faq_view, name='faq'),
     path('protocol', protocol_view, name='protocol'),
     path('contact', contact_view, name='contact'),
+    # path('login', login_view, name='login'),
+    # path('resgister',register_view, name='register')
 ]

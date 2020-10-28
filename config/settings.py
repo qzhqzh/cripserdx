@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'softdelete',
     'task',
     'django_celery_beat',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -88,16 +89,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.user.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.user.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.user.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.user.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -128,7 +129,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'storage', 'collect_static')
 # REST_FRAMEWORK SETTING
 # https://www.django-rest-framework.org/
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
+    # Use Django's standard `django.contrib.user` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -150,3 +151,4 @@ EMAIL_HOST_PASSWORD = 'dxhbfebsxubvbhcf'
 DEFAULT_FROM_EMAIL = '28630707@qq.com'
 EMAIL_SUBJECT_PREFIX = '【Crisperdx】'
 WEB_HOST = '106.53.58.248:9003'
+# AUTH_USER_MODEL = 'user.User'

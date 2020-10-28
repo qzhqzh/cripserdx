@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     {% load static %}
+    <link rel="stylesheet" type='text/css' href="{% static 'css/basic.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/alert.js' %}">
     <link rel="stylesheet" href="{% static 'css/share100.css' %}">
     <link rel="stylesheet" href="{% static 'css/help-tab.css' %}">
@@ -33,6 +34,7 @@
             <p class="red" style="font-size:22px;">Primer Bank </p>
             <p class="green" style="font-size:22px;">for Small non-coding RNAs</p>
         </div>
+
         <br>
         <div id="whole-nav" class="container-fluid deepblue">
             <div class="navbar-header">
@@ -44,6 +46,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+            <div id="login"><a href="{% url 'login' %}">登录</a>/<a href="{% url 'register' %}">注册</a></div>
             <div class="collapse navbar-collapse navbar-right" id="example-navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li id="home" name="home"><a href="{% url 'home' %}">Home</a></li>

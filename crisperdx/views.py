@@ -29,3 +29,5 @@ def protocol_view(request):
 def contact_view(request):
     response = TemplateResponse(request, 'contact.html', {})
     return response
+
+

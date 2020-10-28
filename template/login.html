@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+        <form action="#" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <input type="text">用户名
+        <br>
+        <input type="password">密码
+        <br>
+        <input type="submit" value="登录">
+    </form>
+{% endblock content %}
