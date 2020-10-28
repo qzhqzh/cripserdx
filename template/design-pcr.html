@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form id="design" class="col-md-12 col-md-offset-1 form-horizontal" role="form" action="{% url 'tasks-list' %}"
+    <form id="design-pcr" class="col-md-12 col-md-offset-1 form-horizontal" role="form" action="{% url 'tasks-list' %}"
           method="post">
 
         {% csrf_token %}
@@ -92,7 +92,7 @@
             </div>
         </div>
 
-        <input id="method" name="method" value="pcr" type="hidden" />
+        <input id="method" name="method" value="pcr" type="hidden"/>
         <input type="submit" value="OK">
     </form>
 

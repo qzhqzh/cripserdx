@@ -89,7 +89,7 @@ class Notice(CoreModel):
     def template_params(self):
         return {
             'instance': self._model
-        }
+        }d
 
     def html_template(self):
         template = os.path.join(TEMPLATE_ROOT, 'email', '%s.html' % self.model_method)
@@ -167,6 +167,11 @@ class Task(CoreModel):
         self.finished_at = utc_now()
         self.save()
         self.success_notices()
+
+    def result_url(self):
+        # url
+        pass
+
 
 class Job(object):
 
