@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 import re
 
+def password_check(password):
+    pattern = re.compile(r"")
 
 def email_check(email):
     pattern = re.compile(r"\"?([-a-zA-Z0-9.'?{}]+@\w+\.\w+)\"?")
@@ -76,3 +78,46 @@ class LoginForm(forms.Form):
 
     # def clean_password(self):
     #     result = User.objects.filter()
+
+
+class ChangePasswordForm(forms.Form):
+    username = forms.CharField(label='UserName or Email',max_length=50)
+    old_password = forms.CharField(label='Old Password', max_length=50,widget=forms.PasswordInput)
+    password1 = forms.CharField(label='New Password', max_length=50, widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', max_length=50, widget=forms.PasswordInput)
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        # if password1 and (6 <= len(password1) <= 20):
+        #     return password1
+        # else:
+        #     forms.ValidationError('password leng 6-20')
+        if len(password1) < 6:
+            raise forms.ValidationError("your password is too short")
+        elif len(password1) > 20:
+            raise forms.ValidationError("your password is too long")
+
+        return password1
+
+    def clean_password2(self):
+        # password1 = self.cleaned_data.get('password1')
+        # password2 = self.cleaned_data.get('password2')
+        # if password1 == password2:
+        #     if password2:
+        #         return password2
+        #     else:
+        #         forms.ValidationError('Password must be a string or bytes')
+        # else:
+        #     forms.ValidationError('wrong password')
+
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Password mismatch Please enter again")
+
+        return password2
+
+
+
+

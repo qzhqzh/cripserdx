@@ -1,10 +1,11 @@
-from django.shortcuts import redirect,reverse
+from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
-from .form import RegisterForm, LoginForm
+from .form import RegisterForm, LoginForm, ChangePasswordForm
+from django.contrib.auth.decorators import login_required
 import json
 def register_view(request):
     if request.method == 'GET':
@@ -52,3 +53,47 @@ def login_views(request):
                 return render(request,'login.html', locals())
         else:
             return render(request,'login.html',locals())
+
+
+def logout_view(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
+
+
+
+def changepwd_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        print(username)
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            print('-----')
+            #是否是用户名修改密码
+            user = User.objects.filter(username__exact=username)
+            password = form.cleaned_data['old_password']
+            if user:
+                #判断密码是否正确
+                user = auth.authenticate(username=username, password=password)
+            else:
+                #是否是邮箱修改密码
+                user = User.objects.filter(email__exact=username)
+                user = auth.authenticate(username=username, password=password)
+            if user and user.is_active:
+
+                new_password = form.cleaned_data['password2']
+                user.set_password(new_password)
+                user.save()
+                #print(new_password)
+                return HttpResponseRedirect('/myuser/login/')
+            else:
+                msg = {'msg':'username or Email does not exsit '}
+                return render(request,'changepwd.html', locals())
+        else:
+            error_msg = form.errors.as_json()
+            error_msg = json.dumps(error_msg)
+            return render(request,'changepwd.html', locals())
+    else:
+        form = ChangePasswordForm()
+        return render(request,'changepwd.html', locals())
+
+
