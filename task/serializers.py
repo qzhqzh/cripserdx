@@ -2,7 +2,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import Task
+from config.celery import run_task
+from .models import Task, Notice
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -30,4 +31,13 @@ class PcrTaskSubmitSerializer(TaskSerializer):
 
     def create(self, validated_data):
         print(validated_data)
-        return Task.objects.first()
+        t = Task.objects.first()
+        run_task(t)
+        return t
+
+
+class NoticesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Notice
+        fields = ['id', 'model', 'model_id', 'model_method', 'status', 'started_at', 'finished_at', 'cid']

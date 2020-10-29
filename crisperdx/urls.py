@@ -11,7 +11,8 @@ from crisperdx.views import (
     protocol_rpa_view,
     protocol_lamp_view,
     contact_view,
-    task_view
+    task_view,
+    notice_view,
 )
 from task.views import TaskViewSet
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path('contact', contact_view, name='contact'),
 
     path('task', task_view, name='task'),
+    path('notice', notice_view, name='notice'),
 ]

@@ -2,7 +2,8 @@ from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework import reverse
 
-from task.models import Task
+from task.models import Task, Notice
+
 
 def get_common_context(request):
     return {
@@ -64,9 +65,18 @@ def contact_view(request):
 
 def task_view(request):
     tasks = Task.objects.all()
+    notices = Notice.objects.all()
     if not request.user.is_superuser:
         tasks = tasks.filter(submitter=request.user)
     context = get_common_context(request)
     context['tasks'] = tasks
+    context['notices'] = notices
     response = TemplateResponse(request, 'tasks.html', context)
+    return response
+
+def notice_view(request):
+    notices = Notice.objects.all()
+    context = get_common_context(request)
+    context['notices'] = notices
+    response = TemplateResponse(request, 'notices.html', context)
     return response

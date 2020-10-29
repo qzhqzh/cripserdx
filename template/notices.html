@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <table class="gridtable">
+        <thead>
+        <tr>
+            <td>notice_id</td>
+            <td>status</td>
+            <td>started_at</td>
+            <td>finished_at</td>
+            <td>cid</td>
+            <td>model</td>
+            <td>model_id</td>
+            <td>model_method</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in notices %}
+            <tr>
+                <td> {{ i.id }}</td>
+                <td> {{ i.status }}</td>
+                <td> {{ i.started_at }}</td>
+                <td> {{ i.finished_at }}</td>
+                <td> {{ i.cid }}</td>
+                <td> {{ i.model }}</td>
+                <td> {{ i.model_id }}</td>
+                <td> {{ i.model_method }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}
