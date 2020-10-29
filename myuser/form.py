@@ -55,3 +55,24 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('Password mismatch Please enter again')
 
         return password2
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Username or Email', max_length=50)
+    password = forms.CharField(label='Password', max_length=20,widget=forms.PasswordInput)
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        #邮箱登录
+        if email_check(username):
+            result = User.objects.filter(email__exact=username)
+            if  not result:
+                raise forms.ValidationError('your email does not exist ')
+        else:
+            result = User.objects.filter(username__exact=username)
+            if not result:
+                raise forms.ValidationError('This username does not exist')
+        return username
+
+    # def clean_password(self):
+    #     result = User.objects.filter()

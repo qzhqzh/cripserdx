@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http.response import HttpResponse, HttpResponseRedirect
-from .form import RegisterForm
+from django.contrib import auth
+from .form import RegisterForm, LoginForm
 import json
 def register_view(request):
     if request.method == 'GET':
@@ -33,5 +34,21 @@ def register_view(request):
         # return HttpResponse('注册不成功')
 
 
-class LoginView(TemplateView):
-    template_name = 'login.html'
+def login_views(request):
+    if request.method == 'GET':
+        form = LoginForm()
+        return render(request,'login.html', {'form':form})
+    elif request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = auth.authenticate(username=username,password=password)
+            if user and user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                msg = {'msg':'Wrong password'}
+                return render(request,'login.html', locals())
+        else:
+            return render(request,'login.html',locals())
