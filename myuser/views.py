@@ -43,57 +43,96 @@ def login_views(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
+            print(username)
             password = form.cleaned_data['password']
-            user = auth.authenticate(username=username,password=password)
+            user = auth.authenticate(username=username, password=password)
+            user2 = auth.authenticate(email=username, password=password)
+            print(user2)
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect('/')
+            # else:
+            #     user = auth.authenticate(email=username, password=password)
+            #     if user and user.is_active:
+            #         auth.login(request,user)
             else:
+                if user2 and user2.is_active:
+                    return HttpResponseRedirect('/')
                 msg = {'msg':'Wrong password'}
                 return render(request,'login.html', locals())
         else:
             return render(request,'login.html',locals())
 
 
+@login_required
 def logout_view(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
 
 
-
-def changepwd_view(request):
+@login_required
+def changepwd_view(request, pk):
+    pk=int(pk)
+    print(pk)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        print(username)
+        user = get_object_or_404(User, pk=pk)
         form = ChangePasswordForm(request.POST)
+        print(form)
         if form.is_valid():
-            print('-----')
-            #是否是用户名修改密码
-            user = User.objects.filter(username__exact=username)
-            password = form.cleaned_data['old_password']
-            if user:
-                #判断密码是否正确
-                user = auth.authenticate(username=username, password=password)
-            else:
-                #是否是邮箱修改密码
-                user = User.objects.filter(email__exact=username)
-                user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
-
+                old_password = form.cleaned_data['old_password']
+                print(old_password)
                 new_password = form.cleaned_data['password2']
-                user.set_password(new_password)
-                user.save()
-                #print(new_password)
-                return HttpResponseRedirect('/myuser/login/')
-            else:
-                msg = {'msg':'username or Email does not exsit '}
-                return render(request,'changepwd.html', locals())
+                user = auth.authenticate(username=user.username, password=old_password)
+                if user and user.is_active:
+                    user.set_password(new_password)
+                    user.save()
+                    return HttpResponseRedirect('/myuser/login/')
+                else:
+                    msg = {'msg' : ' Old password is wrong'}
+                    return render(request,'changepwd.html',locals())
         else:
-            error_msg = form.errors.as_json()
-            error_msg = json.dumps(error_msg)
-            return render(request,'changepwd.html', locals())
+            msg = form.errors.as_json()
+            msg = json.dumps(msg)
+            return render(request, 'changepwd.html', locals())
     else:
         form = ChangePasswordForm()
         return render(request,'changepwd.html', locals())
+
+
+
+
+        # username = request.POST.get('username')
+        # print(username)
+        # form = ChangePasswordForm(request.POST)
+        # if form.is_valid():
+        #     print('-----')
+        #     #是否是用户名修改密码
+        #     user = User.objects.filter(username__exact=username)
+        #     password = form.cleaned_data['old_password']
+        #     if user:
+        #         #判断密码是否正确
+        #         user = auth.authenticate(username=username, password=password)
+        #     else:
+        #         #是否是邮箱修改密码
+        #         user = User.objects.filter(email__exact=username)
+        #         user = auth.authenticate(username=username, password=password)
+        #     if user and user.is_active:
+        #
+        #         new_password = form.cleaned_data['password2']
+        #         user.set_password(new_password)
+        #         user.save()
+        #         #print(new_password)
+        #         return HttpResponseRedirect('/myuser/login/')
+        #     else:
+        #         msg = {'msg':'username or Email does not exsit '}
+        #         return render(request,'changepwd.html', locals())
+    #     else:
+    #         error_msg = form.errors.as_json()
+    #         error_msg = json.dumps(error_msg)
+    #         return render(request,'changepwd.html', locals())
+    # else:
+    #     form = ChangePasswordForm()
+    #     return render(request,'changepwd.html', locals())
 
 

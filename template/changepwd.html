@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <form action="{% url 'changepwd' %}" method="post" enctype="multipart/form-data">
+    <a href="">{{ request.user.name }}</a>
+    <form action="{% url 'changepwd' request.user.id %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="submit">

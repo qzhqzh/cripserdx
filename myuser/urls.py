@@ -12,5 +12,5 @@ urlpatterns = [
     path('login/', login_views, name='login'),
     path('resgister/', register_view, name='register'),
     path('logout/',logout_view, name='logout'),
-    path('update/', changepwd_view, name = 'changepwd' )
+    re_path(r'update/(?P<pk>.*)/', changepwd_view, name='changepwd' )
 ]
