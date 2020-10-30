@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'softdelete',
     'task',
     'django_celery_beat',
+    'myuser.apps.MyuserConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'storage', 'collect_static')
 # REST_FRAMEWORK SETTING
 # https://www.django-rest-framework.org/
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
+    # Use Django's standard `django.contrib.user` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
@@ -178,3 +179,5 @@ CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json']
 CELERY_TIMEZONE = 'UTC'
 CELERYD_CONCURRENCY = 45  # 并发个数
+
+# AUTH_USER_MODEL = 'myuser.User'

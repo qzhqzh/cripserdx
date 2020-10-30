@@ -52,4 +52,29 @@
 .divider-color {
   border-color: #BDBDBD;
 }
+/*.navass {*/
+/*  background-color: red;*/
+/*  !*float: right;*!*/
+/*  height: 50px;*/
+/*  width: 150px;*/
+/*  margin-top: 15px;*/
+/*  font-size: 14px;*/
+/*  text-decoration: none;*/
 
+.login a{
+  text-decoration: none;
+  color: red;
+}
+
+#Usernames{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  width: 30px;
+  color: red;
+}
+
+#logout{
+  width: 131px;
+  float: right;
+
+}

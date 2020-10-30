@@ -30,4 +30,6 @@ urlpatterns = [
 
     path('task', task_view, name='task'),
     path('notice', notice_view, name='notice'),
+    # path('login', login_view, name='login'),
+    # path('resgister',register_view, name='register')
 ]

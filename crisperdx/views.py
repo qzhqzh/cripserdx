@@ -80,3 +80,5 @@ def notice_view(request):
     context['notices'] = notices
     response = TemplateResponse(request, 'notices.html', context)
     return response
+
+
