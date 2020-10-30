@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'softdelete',
     'task',
     'django_celery_beat',
-    'myuser.apps.MyuserConfig',
+    'myuser',
 ]
 
 MIDDLEWARE = [

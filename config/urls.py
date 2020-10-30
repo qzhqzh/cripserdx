@@ -25,7 +25,7 @@ from crisperdx.views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('auth/', include(auth_router.urls)),
     path('task/', include(task_router.urls)),
     path('api-user/', include('rest_framework.urls', namespace='rest_framework')),
