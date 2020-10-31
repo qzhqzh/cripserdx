@@ -152,3 +152,6 @@ DEFAULT_FROM_EMAIL = '28630707@qq.com'
 EMAIL_SUBJECT_PREFIX = '【Crisperdx】'
 WEB_HOST = '106.53.58.248:9003'
 # AUTH_USER_MODEL = 'myuser.User'
+AUTHENTICATION_BACKENDS = (
+    'myuser.views.EmailBackend',
+)

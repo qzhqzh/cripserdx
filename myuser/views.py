@@ -1,3 +1,5 @@
+from django.contrib.auth.backends import ModelBackend
+from django.db.models import Q
 from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -7,6 +9,22 @@ from django.contrib import auth
 from .form import RegisterForm, LoginForm, ChangePasswordForm
 from django.contrib.auth.decorators import login_required
 import json
+
+
+class EmailBackend(ModelBackend):
+    '''
+    重写authenticate方法
+    '''
+
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        user = User.objects.filter(Q(username=username) | Q(email=username)).first()
+        if user and user.is_active:
+            if user.check_password(password):
+                return user
+            return None
+        return None
+
+
 def register_view(request):
     if request.method == 'GET':
         form = RegisterForm()
@@ -38,7 +56,7 @@ def register_view(request):
 def login_views(request):
     if request.method == 'GET':
         form = LoginForm()
-        return render(request,'login.html', {'form':form})
+        return render(request,'login.html', {'form': form})
     elif request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -46,8 +64,10 @@ def login_views(request):
             print(username)
             password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
-            user2 = auth.authenticate(email=username, password=password)
-            print(user2)
+            # user = auth.authenticate(username=username, password=password)
+            #not pass
+            # user2 = auth.authenticate(email=username, password=password)
+            #print(user2)
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect('/')
@@ -55,11 +75,11 @@ def login_views(request):
             #     user = auth.authenticate(email=username, password=password)
             #     if user and user.is_active:
             #         auth.login(request,user)
-            else:
-                if user2 and user2.is_active:
-                    return HttpResponseRedirect('/')
-                msg = {'msg':'Wrong password'}
-                return render(request,'login.html', locals())
+            # else:
+            #     if user2 and user2.is_active:
+            #         return HttpResponseRedirect('/')
+            #     msg = {'msg':'Wrong password'}
+            #     return render(request,'login.html', locals())
         else:
             return render(request,'login.html',locals())
 
