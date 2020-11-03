@@ -112,12 +112,23 @@ class ChangePasswordForm(forms.Form):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 
-        if password1 and password2 :
+        if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError("Password mismatch Please enter again")
 
         return password2
 
 
+class FindPasswordForm(forms.Form):
+    email = forms.EmailField(label='Send Email')
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if email_check(email):
+            result = User.objects.filter(email__exact=email)
+            if len(result) < 1 :
+                raise forms.ValidationError('your email not exists')
+        else:
+            raise forms.ValidationError("Please enter a valid email")
 
+        return email
 

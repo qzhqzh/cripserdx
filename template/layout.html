@@ -27,11 +27,12 @@
                 {% if  request.user.username %}
                     <li>Welcome：{{ request.user.username }}</li>
                     <li><a href="{% url 'changepwd' request.user.id %}">修改密码</a></li>
-                    <li><a href="#">找回密码</a></li>
+
                     <li><a href="{% url 'logout' %}">退出</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">登录/</a></li>
                     <li><a href="{% url 'register' %}">注册</a></li>
+                    <li><a href="{% url 'findpwd' %}">找回密码</a></li>
                 {% endif %}
 
 

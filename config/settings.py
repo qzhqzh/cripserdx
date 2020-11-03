@@ -146,12 +146,12 @@ TEMPLATE_ROOT = os.path.join(BASE_DIR, 'storage', 'notices')
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = '28630707@qq.com'
-EMAIL_HOST_PASSWORD = 'dxhbfebsxubvbhcf'
-DEFAULT_FROM_EMAIL = '28630707@qq.com'
+EMAIL_HOST_USER = '136811498@qq.com'
+EMAIL_HOST_PASSWORD = 'qdahlugwjpwbbjgi'
+DEFAULT_FROM_EMAIL = '136811498@qq.com'
 EMAIL_SUBJECT_PREFIX = '【Crisperdx】'
-WEB_HOST = '106.53.58.248:9003'
-# AUTH_USER_MODEL = 'myuser.User'
+# WEB_HOST = '106.53.58.248:9003'
+# Email check
 AUTHENTICATION_BACKENDS = (
     'myuser.views.EmailBackend',
 )
