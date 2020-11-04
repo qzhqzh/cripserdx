@@ -181,3 +181,8 @@ CELERY_TIMEZONE = 'UTC'
 CELERYD_CONCURRENCY = 45  # 并发个数
 
 # AUTH_USER_MODEL = 'myuser.User'
+# WEB_HOST = '106.53.58.248:9003'
+# Email check
+AUTHENTICATION_BACKENDS = (
+    'myuser.views.EmailBackend',
+)
