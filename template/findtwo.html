@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div style="color: red">验证码已发送邮箱</div>
+    <form action="" method="post">
+    {% csrf_token %}
+        请输入验证码：<input type="text" name="vscode">
+        请输入新密码：<input type="password" name="password1">
+        确认新密码：<input type="password" name="password2">
+        <input type="submit" value="Submit">
+    </form>
+    {% if msg %}
+        {{ msg.msg }}
+    {% endif %}
+{% endblock %}
