@@ -10,6 +10,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect, JsonRespons
 from django.contrib import auth
 from django.views.generic.base import View
 
+from config.settings import EMAIL_HOST_USER
 from .form import RegisterForm, LoginForm, ChangePasswordForm,FindPasswordForm
 from django.contrib.auth.decorators import login_required
 import json
@@ -128,7 +129,7 @@ class FindPassword(View):
 
     def get(self,request):
         form = FindPasswordForm()
-        return render(request,'findpassword.html',locals())
+        return render(request,'findpassword.html', locals())
 
     def post(self, request):
         form = FindPasswordForm(request.POST)
@@ -139,7 +140,9 @@ class FindPassword(View):
             request.session["code"] = code
             request.session["email"] = email
             request.session.set_expiry(300)
-            send_mail('密码找回', '当前验证码为：{}'.format(code), '136811498@qq.com', [email])
+            send_mail('密码找回',
+                      '当前验证码为：{}'.format(code),
+                      EMAIL_HOST_USER, [email])
             msg = {'msg':'验证码已发送邮箱请查收'}
             print('----')
             return redirect('/myuser/findpwd2/', locals())
