@@ -16,21 +16,21 @@ def home_view(request):
 
 
 @login_required(login_url='/admin/login')
-def design_pcr_view(request):
-    response = TemplateResponse(request, 'design-pcr.html', get_common_context(request))
+def design_crispr_offinder_view(request):
+    response = TemplateResponse(request, 'crispr-offinder.html', get_common_context(request))
     return response
 
+#
+# @login_required(login_url='/admin/login')
+# def design_rpa_view(request):
+#     response = TemplateResponse(request, 'design-rpa.html', get_common_context(request))
+#     return response
 
-@login_required(login_url='/admin/login')
-def design_rpa_view(request):
-    response = TemplateResponse(request, 'design-rpa.html', get_common_context(request))
-    return response
 
-
-@login_required(login_url='/admin/login')
-def design_lamp_view(request):
-    response = TemplateResponse(request, 'design-lamp.html', get_common_context(request))
-    return response
+# @login_required(login_url='/admin/login')
+# def design_lamp_view(request):
+#     response = TemplateResponse(request, 'design-lamp.html', get_common_context(request))
+#     return response
 
 
 def downloads_view(request):
@@ -43,19 +43,19 @@ def faq_view(request):
     return response
 
 
-def protocol_pcr_view(request):
-    response = TemplateResponse(request, 'protocol-pcr.html', get_common_context(request))
+def protocol_crispr_offinder_view(request):
+    response = TemplateResponse(request, 'protocol-crispr-offinder.html', get_common_context(request))
     return response
 
-
-def protocol_rpa_view(request):
-    response = TemplateResponse(request, 'protocol-rpa.html', get_common_context(request))
-    return response
-
-
-def protocol_lamp_view(request):
-    response = TemplateResponse(request, 'protocol-lamp.html', get_common_context(request))
-    return response
+#
+# def protocol_rpa_view(request):
+#     response = TemplateResponse(request, 'protocol-rpa.html', get_common_context(request))
+#     return response
+#
+#
+# def protocol_lamp_view(request):
+#     response = TemplateResponse(request, 'protocol-lamp.html', get_common_context(request))
+#     return response
 
 
 def contact_view(request):
