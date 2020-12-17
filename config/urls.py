@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from user.urls import router as auth_router
-from auth.urls import router as auth_router
+# from auth.urls import router as auth_router
 from task.urls import router as task_router
 import crisperdx.urls
 import myuser.urls
