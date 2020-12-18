@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'task',
     'django_celery_beat',
     'myuser',
+    'crisperdx',
 ]
 
 MIDDLEWARE = [

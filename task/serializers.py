@@ -1,8 +1,11 @@
 """ description """
+import os
+
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from config.celery import run_task
+from crisperdx.models import Setting
 from .models import Task, Notice
 
 
@@ -14,24 +17,50 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ['status', 'cmd', 'rc', 'msg', 'submitter', 'started_at', 'finished_at']
 
 class PcrTaskSubmitSerializer(TaskSerializer):
-    method = serializers.CharField(default='pcr')
-    dna_sequence = serializers.CharField(write_only=True)
-    genome = serializers.CharField(write_only=True)
-    length_of_protospacer = serializers.CharField(write_only=True)
-    pam_sequence = serializers.CharField(write_only=True)
-    dna_direction = serializers.CharField(write_only=True)
-    location = serializers.CharField(write_only=True)
-    gc_content = serializers.CharField(write_only=True)
-    mismatches_number = serializers.CharField(write_only=True)
+    fasta_seq = serializers.CharField(max_length=10240, write_only=True)
+    pam_seq = serializers.CharField(max_length=128, write_only=True)
 
     class Meta:
         model = Task
-        fields = TaskSerializer.Meta.fields + ['method', 'dna_sequence', 'genome', 'length_of_protospacer', 'pam_sequence',
-                  'dna_direction', 'location', 'gc_content', 'mismatches_number']
+        fields = TaskSerializer.Meta.fields + ['fasta_seq', 'pam_seq']
+
+
+    def _get_default_setting(self):
+        """获取任务运行参数"""
+        try:
+            home_path = Setting.objects.get(key='CRISPR-offinder-home-path').value
+        except:
+            raise Exception('Please setting [CRISPR-offinder-home-path]')
+        try:
+            script = Setting.objects.get(key='CRISPR-offinder-script').value
+        except:
+            raise Exception('Please setting [CRISPR-offinder-script]')
+        try:
+            interpreter = Setting.objects.get(key='interpreter').value
+        except:
+            raise Exception('Please setting [interpreter]')
+        try:
+            output = Setting.objects.get(key='output').value
+        except:
+            raise Exception('Please setting [output]')
+        return home_path, script, interpreter, output
+
 
     def create(self, validated_data):
-        print(validated_data)
-        t = Task.objects.first()
+        fasta_seq = validated_data.pop('fasta_seq')
+        pam_seq = validated_data.pop('pam_seq')
+        home_path, script, interpreter, output = self._get_default_setting()
+
+        t = super(PcrTaskSubmitSerializer, self).create(validated_data)
+        input_dir = os.path.join(output, str(t.id))
+        input_file = os.path.join(input_dir, 'input.fa')
+        os.makedirs(input_dir, exist_ok=True)
+        with open(input_file, 'w')as fh:
+            fh.write(fasta_seq)
+
+        cmd = f"cd {home_path}; {interpreter} {script} -input {input_file} -pamseq {pam_seq} -output {output}"
+        t.cmd = cmd
+        t.save()
         run_task(t)
         return t
 

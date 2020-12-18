@@ -23,25 +23,22 @@
     <script type="text/javascript" src="{% static 'js/bootstrapValidator.js' %}"></script>
 </head>
 <body>
-        <div class="dddd" style="background-color: rebeccapurple ;font-size: 20px">
-            <ul>
-                {% if  request.user.username %}
-                    <li>Welcome：{{ request.user.username }}</li>
-                    <li><a href="{% url 'changepwd' request.user.id %}">修改密码</a></li>
+<div class="dddd" style="background-color: rebeccapurple ;font-size: 20px">
+    <ul>
+        {% if  request.user.username %}
+            <li>Welcome：{{ request.user.username }}</li>
+            <li><a href="{% url 'changepwd' request.user.id %}">修改密码</a></li>
 
-                    <li><a href="{% url 'logout' %}">退出</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">登录/</a></li>
-                    <li><a href="{% url 'register' %}">注册</a></li>
-                    <li><a href="{% url 'findpwd' %}">找回密码</a></li>
-                {% endif %}
-
-
+            <li><a href="{% url 'logout' %}">退出</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">登录/</a></li>
+            <li><a href="{% url 'register' %}">注册</a></li>
+            <li><a href="{% url 'findpwd' %}">找回密码</a></li>
+        {% endif %}
 
 
-
-            </ul>
-        </div>
+    </ul>
+</div>
 <div class="container">
 
     <p style="text-align: right">
@@ -85,21 +82,21 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-{#            <div class="navass">#}
-{##}
-{#                <div>#}
-{#                    {% if request.user %}#}
-{#                        {{ request.user.username }}#}
-{#                    {% else %}#}
-{#                        <div class="login"><a href="{% url 'login' %}">Login</a>/  <a href="{% url 'register' %}">Register</a></div>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#            </div>#}
+            {#            <div class="navass">#}
+            {##}
+            {#                <div>#}
+            {#                    {% if request.user %}#}
+            {#                        {{ request.user.username }}#}
+            {#                    {% else %}#}
+            {#                        <div class="login"><a href="{% url 'login' %}">Login</a>/  <a href="{% url 'register' %}">Register</a></div>#}
+            {#                    {% endif %}#}
+            {#                </div>#}
+            {#            </div>#}
 
 
-{#            <div id="login">#}
+            {#            <div id="login">#}
 
-{#            </div>#}
+            {#            </div>#}
             <div class="collapse navbar-collapse navbar-right" id="example-navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li id="home" name="home"><a href="{% url 'home' %}">Home</a></li>
@@ -118,8 +115,6 @@
                         </ul>
                     </li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
-
-
 
                 </ul>
             </div>

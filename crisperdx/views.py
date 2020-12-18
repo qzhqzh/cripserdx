@@ -1,7 +1,9 @@
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
-from rest_framework import reverse
+from rest_framework.viewsets import ModelViewSet
 
+from crisperdx.models import Setting
+from crisperdx.serializers import SettingSerializer
 from task.models import Task, Notice
 
 
@@ -74,6 +76,17 @@ def task_view(request):
     response = TemplateResponse(request, 'tasks.html', context)
     return response
 
+
+def setting_view(request):
+    Settings = Setting.objects.all()
+    context = get_common_context(request)
+    context['settings'] = []
+    if request.user.is_superuser:
+        context['settings'] = Settings
+    response = TemplateResponse(request, 'settings.html', context)
+    return response
+
+
 def notice_view(request):
     notices = Notice.objects.all()
     context = get_common_context(request)
@@ -81,4 +94,9 @@ def notice_view(request):
     response = TemplateResponse(request, 'notices.html', context)
     return response
 
+
+class SettingViewSet(ModelViewSet):
+    """配置系统的默认变量"""
+    queryset = Setting.objects.all()
+    serializer_class = SettingSerializer
 
