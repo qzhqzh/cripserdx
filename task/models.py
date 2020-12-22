@@ -133,14 +133,14 @@ class Task(CoreModel):
         """任务状态"""
         FAIL = -1, 'Fail'
         WAITING = 0, 'Waiting'
-        RUNNING = 2, 'Running'
-        SUCCESS = 3, 'Success'
+        RUNNING = 1, 'Running'
+        SUCCESS = 2, 'Success'
 
     status = models.IntegerField(choices=StatusChoices.choices, default=StatusChoices.WAITING, verbose_name='Task status')
     cmd = models.CharField(max_length=1024, blank=True)
     rc = models.IntegerField(null=True)
     msg = models.CharField(max_length=10240, blank=True, null=True)
-    submitter = models.ForeignKey(User, on_delete=models.CASCADE)
+    submitter = models.ForeignKey(User, related_name='tasks', on_delete=models.CASCADE)
     started_at = models.DateTimeField(null=True, blank=True)
     finished_at = models.DateTimeField(null=True, blank=True)
 

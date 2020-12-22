@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+    <div class="profile">
+
+
+        <h1>User Profile</h1>
+        <h5 align="center">created at: {{ user.date_joined }}</h5>
+        <hr>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">username</span>
+            <input type="text" class="form-control" value={{ user.username }} aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">email</span>
+            <input type="text" class="form-control" value={{ user.email }} aria-describedby="basic-addon1">
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6"><button class="btn">confirm</button></div>
+            <div class="col-md-6"><a href="{% url 'changepwd' request.user.id %}">修改密码</a></div>
+        </div>
+
+        <br> <br> <br> <br>
+
+        <h1>User Tasks</h1>
+
+        <div class="center">
+            <a href="{% url 'task' %}">Detail tasks</a>
+        </div>
+        <hr>
+
+        <table class="table table-bordered">
+            <tr><td>Fail :</td><td>{{ task_info.fail }}</td></tr>
+            <tr><td>Waiting :</td><td>{{ task_info.waiting }}</td></tr>
+            <tr><td>Running :</td><td>{{ task_info.running }}</td></tr>
+            <tr><td>Success :</td><td>{{ task_info.success }}</td></tr>
+        </table>
+
+    </div>
+
+
+
+
+{% endblock content %}

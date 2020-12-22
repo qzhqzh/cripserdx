@@ -21,42 +21,27 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrapValidator.js' %}"></script>
+
+
+    <link rel="stylesheet/less" type="text/css" href="{% static 'less/layout.less' %}">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 </head>
 <body>
-<div class="dddd" style="background-color: rebeccapurple ;font-size: 20px">
-    <ul>
-        {% if  request.user.username %}
-            <li>Welcome：{{ request.user.username }}</li>
-            <li><a href="{% url 'changepwd' request.user.id %}">修改密码</a></li>
 
-            <li><a href="{% url 'logout' %}">退出</a></li>
-        {% else %}
-            <li><a href="{% url 'login' %}">登录/</a></li>
-            <li><a href="{% url 'register' %}">注册</a></li>
-            <li><a href="{% url 'findpwd' %}">找回密码</a></li>
-        {% endif %}
-
-
-    </ul>
-</div>
 <div class="container">
-
-    <p style="text-align: right">
-        {{ user.name }}/{{ user.email }}
+    <div class="topbar">
 
         {% if user.email %}
-            <button>
-                <a href="/admin/logout/?next=/home">Log out</a>
-            </button>
+            <a href="{% url 'user' %}">{{ user.name }}/{{ user.email }}</a> | <a href="{% url 'logout' %}">Login out</a>
         {% else %}
-            <button>
-                <a href="/admin/?next=/home">Log in</a>
-            </button>
+            [
+            <a href="{% url 'register' %}">Register</a>
+            /
+            <a href="{% url 'login' %}">Login in</a>
+            ]
         {% endif %}
+   </div>
 
-        <br>
-        <br>
-    </p>
     <nav class="nav navbar-default ">
 
         <a href="" title="sRNAPrimerDB">

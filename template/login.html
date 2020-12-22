@@ -1,17 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-        <form action="#" enctype="multipart/form-data" method="post">
+    <form action="#" enctype="multipart/form-data" method="post">
         {% csrf_token %}
+        <div class="row">
             {{ form.as_p }}
-{#        <input type="text">用户名#}
-{#        <br>#}
-{#        <input type="password">密码#}
-{#        <br>#}
-        <input type="submit" value="登录">
+        </div>
+
+        <div class="row">
+            <div class="col-md-6"><input type="submit" value="登录"></div>
+            <div class="col-md-6"><a href="{% url 'findpwd' %}">找回密码</a></div>
+        </div>
+
         {% if msg %}
             <div>{{ msg.msg }}</div>
-
         {% endif %}
     </form>
+
+
+
+
 {% endblock content %}

@@ -5,15 +5,19 @@ from django.db.models import Q
 from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from django.views.generic import TemplateView
 from django.http.response import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import auth
 from django.views.generic.base import View
 
 from config.settings import EMAIL_HOST_USER
+from crisperdx.views import get_common_context
 from .form import RegisterForm, LoginForm, ChangePasswordForm,FindPasswordForm
 from django.contrib.auth.decorators import login_required
 import json
+
+from .serialziers import UserSerializer
 
 
 class EmailBackend(ModelBackend):
@@ -208,5 +212,10 @@ class FindPassword2(View):
             return render(request,'findtwo.html',locals())
 
 
-
-
+def user_view(request):
+    """ User info view """
+    context = get_common_context(request)
+    extra_info = UserSerializer(request.user).data
+    context.update(extra_info)
+    response = TemplateResponse(request, 'user.html', context)
+    return response
