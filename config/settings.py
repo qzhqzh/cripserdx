@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from config.envs import REDIS_HOST, REDIS_PORT, REDIS_DB
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -171,15 +173,17 @@ CELERY_TASK_ROUTES = {
     'config.celery.run_task': {'queue': 'task'},
     'config.celery.notification_service': {'queue': 'email'},
 }
-CELERY_BROKER_URL = 'redis://%s:%d/%d' % ('redis-crisperdx', 6379, 1)
-CELERY_RESULT_BACKEND = 'redis://%s:%d/%d' % ('redis-crisperdx', 6379, 1)
+CELERY_BROKER_URL = 'redis://%s:%d/%d' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
+CELERY_RESULT_BACKEND = 'redis://%s:%d/%d' % (REDIS_HOST, REDIS_PORT, REDIS_DB)
 
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 60 * 60 * 24 * 365}
 CELERY_TASK_SERIALIZER = 'pickle'
 CELERY_RESULT_SERIALIZER = 'pickle'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json']
-CELERY_TIMEZONE = 'UTC'
-CELERYD_CONCURRENCY = 45  # 并发个数
+CELERYD_CONCURRENCY = 3  # 并发个数
+
+CELERY_TIMEZONE = "Asia/Shanghai"
+CELERY_ENABLE_UTC = True
 
 # AUTH_USER_MODEL = 'myuser.User'
 # WEB_HOST = '106.53.58.248:9003'

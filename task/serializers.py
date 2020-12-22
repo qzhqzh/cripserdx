@@ -14,7 +14,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['status', 'cmd', 'rc', 'msg', 'submitter', 'started_at', 'finished_at']
+        fields = ['status', 'cmd', 'rc', 'submitter', 'started_at', 'finished_at']
+
 
 class PcrTaskSubmitSerializer(TaskSerializer):
     fasta_seq = serializers.CharField(max_length=10240, write_only=True)
@@ -58,10 +59,10 @@ class PcrTaskSubmitSerializer(TaskSerializer):
         with open(input_file, 'w')as fh:
             fh.write(fasta_seq)
 
-        cmd = f"cd {home_path}; {interpreter} {script} -input {input_file} -pamseq {pam_seq} -output {output}"
+        cmd = f"cd {home_path}; {interpreter} {script} -input {input_file} -pamseq {pam_seq} -output {input_dir}"
         t.cmd = cmd
         t.save()
-        run_task(t)
+        r = run_task.apply_async(args=(t,))
         return t
 
 

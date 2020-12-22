@@ -125,7 +125,7 @@ class Notice(CoreModel):
 
 class Task(CoreModel):
     class Meta:
-        ordering = ('status',)
+        ordering = ('status', '-created_at')
         verbose_name = 'Task'
         verbose_name_plural = 'Tasks'
 
@@ -172,6 +172,40 @@ class Task(CoreModel):
         # url
         pass
 
+    def _get_default_setting(self):
+        """获取任务运行参数"""
+        from crisperdx.models import Setting
+        try:
+            home_path = Setting.objects.get(key='CRISPR-offinder-home-path').value
+        except:
+            raise Exception('Please setting [CRISPR-offinder-home-path]')
+        try:
+            script = Setting.objects.get(key='CRISPR-offinder-script').value
+        except:
+            raise Exception('Please setting [CRISPR-offinder-script]')
+        try:
+            interpreter = Setting.objects.get(key='interpreter').value
+        except:
+            raise Exception('Please setting [interpreter]')
+        try:
+            output = Setting.objects.get(key='output').value
+        except:
+            raise Exception('Please setting [output]')
+        return home_path, script, interpreter, output
+
+    def output(self):
+        home_path, script, interpreter, output = self._get_default_setting()
+        input_dir = os.path.join(output, str(self.id))
+
+        for f in os.listdir(input_dir):
+            if 'CRISPR_offinder.report' in f:
+                break
+
+    def brief_msg(self):
+        if self.msg and len(self.msg) > 1024:
+            return self.msg[:512] + '...' + self.msg[-512:]
+        return self.msg
+
 
 class Job(object):
 
@@ -185,6 +219,8 @@ class Job(object):
         self.task.run_notices()
 
         self.task.rc, self.task.msg = subprocess.getstatusoutput(self.task.cmd)
+        if 'Invalid sequence file. Please make sure file is in FASTA format' in self.task.msg:
+            self.task.rc = 1
         self.task.save()
 
         if self.task.rc:
