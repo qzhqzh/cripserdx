@@ -1,3 +1,4 @@
+
 from django.template.response import TemplateResponse
 from django.contrib.auth.decorators import login_required
 from rest_framework.viewsets import ModelViewSet
@@ -66,13 +67,34 @@ def contact_view(request):
 
 
 def task_view(request):
+    from django.core.paginator import Paginator
+
     tasks = Task.objects.all()
-    notices = Notice.objects.all()
     if not request.user.is_superuser:
         tasks = tasks.filter(submitter=request.user)
     context = get_common_context(request)
     context['tasks'] = tasks
-    context['notices'] = notices
+
+    pageIndex = request.GET.get("pageIndex", 0)
+    limit = 5
+    paginator = Paginator(tasks, limit)
+    number = pageIndex
+    if int(pageIndex) < 1:
+        """当第一页的时候需要处理页码"""
+        pageIndex = 1
+        number = 0
+    page = paginator.page(int(pageIndex))
+    DataList = []
+    for r in page.object_list:
+        DataList.append(r)
+
+    context.update({
+        'DataList': DataList,  # 数据列表
+        "count": tasks.count(),  # 这里可以是AccountBooks.count()也可以是page.count(),
+        "page": page,  # page object
+        "number": number,  # 页码
+        "limit": limit,  # 每页多少条数据
+    })
     response = TemplateResponse(request, 'tasks.html', context)
     return response
 
@@ -88,9 +110,35 @@ def setting_view(request):
 
 
 def notice_view(request):
+    from django.core.paginator import Paginator
+
     notices = Notice.objects.all()
+    if not request.user.is_superuser:
+        notices = notices.filter(submitter=request.user)
     context = get_common_context(request)
     context['notices'] = notices
+
+    pageIndex = request.GET.get("pageIndex", 0)
+    limit = 5
+    paginator = Paginator(notices, limit)
+    number = pageIndex
+    if int(pageIndex) < 1:
+        """当第一页的时候需要处理页码"""
+        pageIndex = 1
+        number = 0
+    page = paginator.page(int(pageIndex))
+    DataList = []
+    for r in page.object_list:
+        DataList.append(r)
+
+    context.update({
+        'DataList': DataList,  # 数据列表
+        "count": notices.count(),  # 这里可以是AccountBooks.count()也可以是page.count(),
+        "page": page,  # page object
+        "number": number,  # 页码
+        "limit": limit,  # 每页多少条数据
+    })
+
     response = TemplateResponse(request, 'notices.html', context)
     return response
 

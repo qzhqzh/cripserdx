@@ -7,9 +7,11 @@ from crisperdx.views import (
     faq_view,
     contact_view,
     task_view,
-    notice_view, design_crispr_offinder_view, protocol_crispr_offinder_view, SettingViewSet, setting_view,
+    notice_view,
+    design_crispr_offinder_view,
+    protocol_crispr_offinder_view,
+    SettingViewSet, setting_view,
 )
-from task.views import TaskViewSet
 
 
 router = routers.SimpleRouter(trailing_slash=False)

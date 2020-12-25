@@ -8,7 +8,6 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 
 from config.celery import run_task
-from crisperdx.views import get_common_context
 from task.models import Task, Notice
 from task.serializers import TaskSerializer, TaskSubmitSerializer, NoticesSerializer
 
@@ -26,6 +25,8 @@ class TaskViewSet(ModelViewSet):
     def result(self, request, *args, **kwargs):
         """ task detail
         """
+        from crisperdx.views import get_common_context
+
         context = get_common_context(request)
         task = self.get_object()
         context['task'] = task
@@ -37,6 +38,8 @@ class TaskViewSet(ModelViewSet):
     def download_xls(self, request, *args, **kwargs):
         """ task detail
         """
+        from crisperdx.views import get_common_context
+
         context = get_common_context(request)
         task = self.get_object()
         if not os.path.exists(task.output):

@@ -16,7 +16,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for i in tasks %}
+            {% for i in DataList %}
                 <tr>
                     <td> {{ i.id }}</td>
                     <td> {{ i.status }}</td>
@@ -33,5 +33,62 @@
             {% endfor %}
             </tbody>
         </table>
+
+
+        <div class="row">
+            <div id="page-break" class="pagination col-md-12"></div>
+        </div>
+
+        <script>
+            // 分页
+            function pageBreak(countPage = {{ count }}, nowPage = {{ number }},) {
+
+                var demo1 = BootstrapPagination($("#page-break"), {
+                    // layoutScheme: "lefttext,pagesizelist,firstpage,prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage,lastpage,pageinput,righttext",
+                    layoutScheme: "firstpage,prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage,lastpage,pageinput,righttext",
+                    //记录总数。
+                    total: countPage,
+                    //分页尺寸。指示每页最多显示的记录数量。
+                    pageSize: {{ limit }},
+                    //当前页索引编号。从其开始（从0开始）的整数。
+                    pageIndex: nowPage,
+                    //指示分页导航栏中最多显示的页索引数量。
+                    pageGroupSize: 5,
+                    //位于导航条左侧的输出信息格式化字符串
+                    // leftFormateString: "本页{count}条记录/共{total}条记录",
+                    //位于导航条右侧的输出信息格式化字符串
+                    rightFormateString: "第{pageNumber}页/共{totalPages}页",
+                    //页码文本格式化字符串。
+                    pageNumberFormateString: "{pageNumber}",
+                    //分页尺寸输出格式化字符串
+                    pageSizeListFormateString: "每页显示{pageSize}条记录",
+                    //上一页导航按钮文本。
+                    prevPageText: "上一页",
+                    //下一页导航按钮文本。
+                    nextPageText: "下一页",
+                    //上一组分页导航按钮文本。
+                    prevGroupPageText: "上一组",
+                    //下一组分页导航按钮文本。
+                    nextGroupPageText: "下一组",
+                    //首页导航按钮文本。
+                    firstPageText: "首页",
+                    //尾页导航按钮文本。
+                    lastPageText: "尾页",
+                    //设置页码输入框中显示的提示文本。
+                    pageInputPlaceholder: "1秒",
+                    //接受用户输入内容的延迟时间。单位：毫秒
+                    pageInputTimeout: 1000,
+                    //分页尺寸列表。
+                    pageSizeList: [5, 10, 20, 50, 100, 200],
+                    //当分页更改后引发此事件。
+                    pageChanged: function (pageIndex, pageSize) {
+                    	//重新请求获取数据的url
+                        window.location.href = '{{URLList}}' + "?pageIndex=" + pageIndex
+                    },
+                });
+            }
+            pageBreak();
+        </script>
     </div>
+
 {% endblock content %}

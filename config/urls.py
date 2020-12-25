@@ -19,7 +19,6 @@ from user.urls import router as auth_router
 # from auth.urls import router as auth_router
 from task.urls import router as task_router
 import crisperdx.urls
-import myuser.urls
 
 from crisperdx.views import home_view
 
