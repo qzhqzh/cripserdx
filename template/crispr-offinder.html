@@ -1,46 +1,56 @@
 {% extends "layout.html" %}
 
 {% block content %}
+    <div class="design">
+        <form id="crispr-offinder"
+              class="col-md-12 form-horizontal" role="form"
+              action="{% url 'tasks-list' %}"
+              method="post">
 
-    <form id="crispr-offinder" class="col-md-12 col-md-offset-1 form-horizontal" role="form" action="{% url 'tasks-list' %}"
-          method="post">
+            {% csrf_token %}
 
-        {% csrf_token %}
+            <div class="row" align="center">
+                <h2>Crisper-offinder online design</h2>
+            </div>
 
-        <div class="row">
-            <h4>sgRNA design parameter</h4>
-        </div>
+            <br>
+            <br>
+            <br>
 
-        <br>
-        <br>
-        <br>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="fasta_seq">Fasta-Seq: </label>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="fasta_seq">input sequence: </label>
+                    </div>
+                    <div class="col-md-8">
+                        <textarea id="fasta_seq" class="form-control" name="fasta_seq"
+                                  value="{{ fasta_seq }}"></textarea>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <textarea id="fasta_seq" name="fasta_seq" value="{{ fasta_seq }}"></textarea>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="pam_seq">PAM sequence: </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="pam_seq" class="form-control" type="text" name="pam_seq" value="{{ pam_seq }}">
+                    </div>
                 </div>
+
+                <hr>
+
             </div>
 
             <div class="row">
                 <div class="col-md-4">
-                    <label for="pam_seq">PAM-Seq: </label>
                 </div>
                 <div class="col-md-8">
-                    <input id="pam_seq" type="text" name="pam_seq" value="{{ pam_seq }}">
+                    <input class="btn btn-primary" type="submit" value="OK">
                 </div>
+
             </div>
-
-            <hr>
-
-        </div>
-
-        <input id="method" name="method" value="pcr" type="hidden"/>
-        <input type="submit" value="OK">
-    </form>
-
-
+        </form>
+    </div>
 {% endblock content %}

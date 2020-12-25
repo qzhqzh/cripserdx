@@ -139,6 +139,7 @@ class Task(CoreModel):
     status = models.IntegerField(choices=StatusChoices.choices, default=StatusChoices.WAITING, verbose_name='Task status')
     cmd = models.CharField(max_length=1024, blank=True)
     rc = models.IntegerField(null=True)
+    cid = models.CharField(max_length=32, null=True, blank=True)
     msg = models.CharField(max_length=10240, blank=True, null=True)
     submitter = models.ForeignKey(User, related_name='tasks', on_delete=models.CASCADE)
     started_at = models.DateTimeField(null=True, blank=True)
@@ -193,13 +194,36 @@ class Task(CoreModel):
             raise Exception('Please setting [output]')
         return home_path, script, interpreter, output
 
-    def output(self):
+    def setting_output_dir(self):
         home_path, script, interpreter, output = self._get_default_setting()
-        input_dir = os.path.join(output, str(self.id))
+        return os.path.join(output, str(self.id))
 
-        for f in os.listdir(input_dir):
+    @property
+    def output_dir(self):
+        outdir = self.setting_output_dir()
+        for f in os.listdir(self.setting_output_dir()):
             if 'CRISPR_offinder.report' in f:
-                break
+                return os.path.join(outdir, f)
+        return None
+
+    @property
+    def output(self):
+        if self.output_dir:
+            return os.path.join(self.output_dir, 'CRISPR_offinder_report.xls')
+        return None
+
+    def get_output(self):
+        content_arr = list()
+        with open(self.output)as fh:
+            header = fh.readline()
+            header_array = header.strip('\n').split('\t')
+            for line in fh:
+                content_arr.append(line.strip('\n').split('\t'))
+        return {
+            'file': self.output,
+            'header': header_array,
+            'content': content_arr,
+        }
 
     def brief_msg(self):
         if self.msg and len(self.msg) > 1024:

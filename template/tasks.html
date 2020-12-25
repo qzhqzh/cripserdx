@@ -1,34 +1,37 @@
 {% extends "layout.html" %}
-
 {% block content %}
-
-    <table class="gridtable">
-        <thead>
-        <tr>
-            <td>task_id</td>
-            <td>status</td>
-            <td>started_at</td>
-            <td>finished_at</td>
-            <td>cmd</td>
-            <td>rc</td>
-            <td>msg</td>
-            <td>submitter</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for i in tasks %}
+    <div class="design">
+        <table class="gridtable table table-bordered">
+            <thead>
             <tr>
-                <td> {{ i.id }}</td>
-                <td> {{ i.status }}</td>
-                <td> {{ i.started_at }}</td>
-                <td> {{ i.finished_at }}</td>
-                <td> {{ i.cmd }}</td>
-                <td> {{ i.rc }}</td>
-                <td> {{ i.brief_msg }}</td>
-                <td> {{ i.submitter }}</td>
+                <td>task_id</td>
+                <td>status</td>
+                <td>started_at</td>
+                <td>finished_at</td>
+                <td>cmd</td>
+                <td>rc</td>
+                <td>msg</td>
+                <td>submitter</td>
+                <td>Result</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for i in tasks %}
+                <tr>
+                    <td> {{ i.id }}</td>
+                    <td> {{ i.status }}</td>
+                    <td> {{ i.started_at }}</td>
+                    <td> {{ i.finished_at }}</td>
+                    <td> {{ i.cmd }}</td>
+                    <td> {{ i.rc }}</td>
+                    <td> {{ i.brief_msg }}</td>
+                    <td> {{ i.submitter }}</td>
+                    <td><a href="{% url 'tasks-result' i.id %}">
+                        <i class="fa fa-table" style="font-size:36px"></i>
+                    </a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

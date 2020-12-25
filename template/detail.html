@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="design">
+        <table class="gridtable table table-bordered">
+            <tr>
+                <td>task id:</td>
+                <td>{{ task.id }}</td>
+            </tr>
+            <tr>
+                <td>task status:</td>
+                <td>{{ task.status }}</td>
+            </tr>
+            </tr>
+            <tr>
+                <td>task started at:</td>
+                <td>{{ task.started_at }}</td>
+            </tr>
+            </tr>
+            <tr>
+                <td>task finished at:</td>
+                <td>{{ task.finished_at }}</td>
+            </tr>
+            <tr>
+                <td>task cmd:</td>
+                <td>{{ task.cmd }}</td>
+            </tr>
+            <tr>
+                <td>task rc:</td>
+                <td>{{ task.rc }}</td>
+            </tr>
+            <tr>
+                <td>task cid:</td>
+                <td>{{ task.cid }}</td>
+            </tr>
+            <tr>
+                <td>download result:</td>
+                <td>
+                    <a href="{% url 'tasks-download-xls' task.id %}" download="{{ task.id }}_result.xls">
+                        <i class="fa fa-download" style="font-size:36px"></i>
+                    </a></td>
+            </tr>
+        </table>
+        <hr>
+        <table class="gridtable table table-bordered">
+            <tr>
+                {% for item in result.header %}
+                    <th>
+                        {{ item }}
+                    </th>
+                {% endfor %}
+            </tr>
+            {% for item in result.content %}
+                <tr>
+                    {% for sub_item in item %}
+                        <td>
+                            {{ sub_item }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+{% endblock content %}

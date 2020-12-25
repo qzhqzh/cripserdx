@@ -17,7 +17,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ['status', 'cmd', 'rc', 'submitter', 'started_at', 'finished_at']
 
 
-class PcrTaskSubmitSerializer(TaskSerializer):
+class TaskSubmitSerializer(TaskSerializer):
     fasta_seq = serializers.CharField(max_length=10240, write_only=True)
     pam_seq = serializers.CharField(max_length=128, write_only=True)
 
@@ -46,13 +46,13 @@ class PcrTaskSubmitSerializer(TaskSerializer):
             raise Exception('Please setting [output]')
         return home_path, script, interpreter, output
 
-
     def create(self, validated_data):
         fasta_seq = validated_data.pop('fasta_seq')
         pam_seq = validated_data.pop('pam_seq')
         home_path, script, interpreter, output = self._get_default_setting()
 
-        t = super(PcrTaskSubmitSerializer, self).create(validated_data)
+        t = super(TaskSubmitSerializer, self).create(validated_data)
+
         input_dir = os.path.join(output, str(t.id))
         input_file = os.path.join(input_dir, 'input.fa')
         os.makedirs(input_dir, exist_ok=True)
@@ -62,7 +62,12 @@ class PcrTaskSubmitSerializer(TaskSerializer):
         cmd = f"cd {home_path}; {interpreter} {script} -input {input_file} -pamseq {pam_seq} -output {input_dir}"
         t.cmd = cmd
         t.save()
-        r = run_task.apply_async(args=(t,))
+        #cid = run_task.apply_async(args=(t,))
+        print('start submit')
+        cid = run_task.delay(t)
+        t.cid = cid
+        t.save()
+        print(t.cid)
         return t
 
 
